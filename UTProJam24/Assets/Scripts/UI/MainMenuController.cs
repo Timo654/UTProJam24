@@ -74,6 +74,11 @@ public class MainMenuController : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(optionsBackButton.gameObject);
     }
 
+    public void OnCreditsPressed()
+    {
+        LevelChanger.Instance.FadeToLevel("Credits");
+    }
+
     public void OnLeaveOptions()
     {
         if (!optionsMenu.activeSelf) return;
