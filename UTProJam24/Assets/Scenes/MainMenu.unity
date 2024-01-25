@@ -800,6 +800,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6799065705922096151, guid: de6a6f1d7181ce548a6b3779703da860, type: 3}
   m_PrefabInstance: {fileID: 1320075028}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1320075030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6799065705922096144, guid: de6a6f1d7181ce548a6b3779703da860, type: 3}
+  m_PrefabInstance: {fileID: 1320075028}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1617675169 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 647317383988156021, guid: 2352472e21a5d704888f473c36618a7b, type: 3}
@@ -943,7 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuButtons: {fileID: 1080069285}
   optionsMenu: {fileID: 1829723666}
-  exitButton: {fileID: 0}
+  exitButton: {fileID: 1320075030}
   optionsButton: {fileID: 1268177168}
   optionsBackButton: {fileID: 1617675169}
 --- !u!1001 &2100053344
