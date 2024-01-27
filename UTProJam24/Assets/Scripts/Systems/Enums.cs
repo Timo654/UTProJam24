@@ -7,3 +7,14 @@ public enum ControlType
     XBOX,
     DualShock
 }
+
+public enum ItemType
+{
+    Wrench,
+    Hammer,
+    FireExtinguisher,
+    Tape,
+    Gun,
+    Gasoline,
+    Alcohol
+}
