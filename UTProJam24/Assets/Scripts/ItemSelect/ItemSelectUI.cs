@@ -28,6 +28,7 @@ public class ItemSelectUI : MonoBehaviour
     }
     public void OpenBox(List<ItemData> items)
     {
+        if (itemList.parent.gameObject.activeSelf) return;
         OnOpenItemSelect?.Invoke();
         UpdateItems(items);
         itemList.parent.gameObject.SetActive(true);
@@ -35,6 +36,7 @@ public class ItemSelectUI : MonoBehaviour
 
     public void CloseBox()
     {
+        if (!itemList.parent.gameObject.activeSelf) return;
         OnCloseItemSelect?.Invoke();
         itemList.parent.gameObject.SetActive(false);
         // kill the children

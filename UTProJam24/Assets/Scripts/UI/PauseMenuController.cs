@@ -53,7 +53,9 @@ public class PauseMenuController : MonoBehaviour
         pauseAction.Enable();
         pauseAction.performed += OnPauseButton;
         backAction.performed += OnPauseButton;
-        LevelChanger.OnFadeInFinished += HandleFadeIn;
+        LevelChanger.OnFadeInFinished += EnablePause;
+        ItemSelectUI.OnOpenItemSelect += DisablePause;
+        ItemSelectUI.OnCloseItemSelect += EnablePause;
     }
 
     public void OnDisable()
@@ -62,10 +64,17 @@ public class PauseMenuController : MonoBehaviour
         pauseAction.Disable();
         backAction.performed -= OnPauseButton;
         backAction.Disable();
-        LevelChanger.OnFadeInFinished -= HandleFadeIn;
+        LevelChanger.OnFadeInFinished -= EnablePause;
+        ItemSelectUI.OnOpenItemSelect -= DisablePause;
+        ItemSelectUI.OnCloseItemSelect -= EnablePause;
     }
 
-    void HandleFadeIn()
+    void DisablePause()
+    {
+        canPause = false;
+    }
+
+    void EnablePause()
     {
         canPause = true;
     }

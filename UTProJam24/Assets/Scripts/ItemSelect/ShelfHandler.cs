@@ -12,6 +12,7 @@ public class ShelfHandler : MonoBehaviour
     PlayerControls playerControls;
     InputAction openAction;
     private bool interactable = false;
+    private bool shelfOpen = false;
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode
@@ -21,14 +22,19 @@ public class ShelfHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        Item.AddItemToInventory += RemoveItem;
+        InventorySystem.ItemAdded += RemoveItem;
+        ItemSelectUI.OnCloseItemSelect += CloseUI;
         openAction.Enable();
         openAction.performed += ShelfOpen;
     }
 
+    private void CloseUI()
+    {
+        shelfOpen = false;
+    }
     private void OnDisable()
     {
-        Item.AddItemToInventory -= RemoveItem;
+        InventorySystem.ItemAdded -= RemoveItem;
         openAction.Disable();
         openAction.performed -= ShelfOpen;
     }
@@ -40,8 +46,12 @@ public class ShelfHandler : MonoBehaviour
 
     public void ShelfOpen(InputAction.CallbackContext context)
     {
-        Debug.Log("opening shelf");
-        OnOpenShelf?.Invoke(items);
+        if (interactable && !shelfOpen)
+        {
+            shelfOpen = true;
+            Debug.Log("opening shelf");
+            OnOpenShelf?.Invoke(items);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
