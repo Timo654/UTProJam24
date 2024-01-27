@@ -158,8 +158,30 @@
         {
             "name": "Gameplay",
             "id": "04832481-59bc-446f-a6d3-01f337bf3f9e",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "SwitchCamera",
+                    "type": "Button",
+                    "id": "2fecc3fe-c05b-4ddd-bbad-7cc8f4f561aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "364da8de-e8ab-49cd-a11c-29bcfb1c2c88",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SwitchCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         },
         {
             "name": "Cheats",
