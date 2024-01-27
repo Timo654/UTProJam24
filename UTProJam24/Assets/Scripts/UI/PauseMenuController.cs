@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
+    public static Action<bool> GamePaused;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject pauseButtons;
@@ -108,6 +110,7 @@ public class PauseMenuController : MonoBehaviour
     void PauseGame()
     {
         if (Time.timeScale < 1.0f) return;
+        GamePaused?.Invoke(true);
         Time.timeScale = 0f;
         UIFader.FadeCanvasGroup(pauseMenuCG);
         EVRef.SetSelectedGameObject(firstSelectedUIElement);
@@ -119,6 +122,7 @@ public class PauseMenuController : MonoBehaviour
     void UnpauseGame()
     {
         Time.timeScale = 1f;
+        GamePaused?.Invoke(false);
         pauseMenu.SetActive(false);
         AudioManager.Unpause();
         backAction.Disable();
