@@ -41,6 +41,7 @@ public class ShelfHandler : MonoBehaviour
 
     private void RemoveItem(ItemData item)
     {
+        if (!shelfOpen) return;
         items.Remove(item);
     }
 

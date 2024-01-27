@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
 {
+    // FIXME - duplicate items do not show up properly in UI
     public static Action<ItemData> ItemAdded;
     public static Action<ItemData> ItemConsumed;
     public int inventorySize = 2;
@@ -39,6 +40,7 @@ public class InventorySystem : MonoBehaviour
         var button = Instantiate(itemPrefab, transform.position, transform.rotation, transform);
         var buttonScript = button.GetComponent<Item>();
         buttonScript.SetupItem(item, false);
+        Debug.Log($"added {item}");
     }
 
     private void RemoveDisplayItem(ItemData item)

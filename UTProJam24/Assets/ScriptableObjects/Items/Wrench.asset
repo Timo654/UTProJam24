@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wrench
   m_EditorClassIdentifier: 
   displayName: Wrench
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: f46c7bfd7b105c04da33b25db42ce8ae, type: 3}
   type: 0
