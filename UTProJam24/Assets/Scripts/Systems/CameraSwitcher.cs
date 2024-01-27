@@ -16,8 +16,10 @@ public class CameraSwitcher : MonoBehaviour
     {
         playerControls = new PlayerControls();
         cameraAction = playerControls.Gameplay.SwitchCamera;
+#if !UNITY_EDITOR // TODO - might have to adjust this behaviour anyways, should probbaly start in future
         pastCamera.enabled = true;
         futureCamera.enabled = false;
+#endif
         cameraAnim = GetComponent<Animator>();
     }
 

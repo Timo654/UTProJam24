@@ -4,13 +4,17 @@ using UnityEngine;
 public class FacilityHandler : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static Action OnFacilityDestroyed;
-    public static Action OnFacilitySaved;
+    public static Action<EndingType> OnFacilityDestroyed;
+    public static Action<EndingType> OnFacilitySaved;
+    public static Action<float> OnFacilityHPDown;
+    public static Action<float> SetInitialFacilityHP;
     private float facilityHealth = 1000f;
+    [SerializeField] private Timer timer;
 
     void Start()
     {
-        // TODO - add the timer here
+        SetInitialFacilityHP?.Invoke(facilityHealth);
+        timer.StartTimer(120f);
     }
 
     // Update is called once per frame
@@ -18,7 +22,7 @@ public class FacilityHandler : MonoBehaviour
     {
         if (facilityHealth <= 0f)
         {
-            OnFacilityDestroyed.Invoke();
+            OnFacilityDestroyed.Invoke(EndingType.BadEnding);
         }
     }
 
@@ -36,11 +40,12 @@ public class FacilityHandler : MonoBehaviour
 
     private void FacilitySaved()
     {
-        OnFacilitySaved?.Invoke();
+        OnFacilitySaved?.Invoke(EndingType.GoodEnding);
     }
     private void DecreaseFacilityHealth(float decrAmount)
     {
         facilityHealth -= decrAmount;
+        OnFacilityHPDown?.Invoke(facilityHealth);
     }
 
 }

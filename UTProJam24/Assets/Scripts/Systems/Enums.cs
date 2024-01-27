@@ -26,3 +26,10 @@ public enum ObstacleType
     WaterLeak,
     AirPressure
 }
+
+public enum EndingType
+{
+    BadEnding, // explodes
+    GoodEnding, // city is saved
+    SecretEnding // no clue yet
+}
