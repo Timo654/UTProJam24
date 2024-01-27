@@ -6,16 +6,19 @@ using UnityEngine.UI;
 public class Item : MonoBehaviour
 {
     public static Action<ItemData> TryAddItemToInventory;
+    public static Action<ItemData> ItemUseConfirm;
     public ItemData itemData;
     private Image image;
     private TextMeshProUGUI itemText;
-    public void SetupItem(ItemData data, bool isInteractable = true)
+    private bool confirmUI = false;
+    public void SetupItem(ItemData data, bool isInteractable = true, bool isConfirmUI = false)
     {
         image = transform.GetChild(0).GetComponent<Image>();
         itemText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         itemData = data;
         image.sprite = data.sprite;
         itemText.text = data.displayName;
+        confirmUI = isConfirmUI;
         GetComponent<Button>().interactable = isInteractable;
     }
 
@@ -30,11 +33,19 @@ public class Item : MonoBehaviour
     }
     public void OnItemSelected()
     {
-        TryAddItemToInventory?.Invoke(itemData);
+        if (confirmUI)
+        {
+            ItemUseConfirm?.Invoke(itemData);
+        }
+        else
+        {
+            TryAddItemToInventory?.Invoke(itemData);
+        }
+        
     }
 
     private void OnItemAddedToInventory(ItemData data)
     {
-        if (itemData == data) Destroy(gameObject); // FIXME - does not allow duplicates
+        if (itemData == data) Destroy(gameObject); // FIXME - does not allow duplicates. Investigate if this breaks UI??
     }
 }

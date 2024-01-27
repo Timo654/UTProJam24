@@ -1,11 +1,13 @@
+using System;
 using UnityEngine;
 
 public class PlayerHandler : MonoBehaviour
 {
     //hardcoded two players yeah
+    public static Action<CurrentPlayer> OnTimelineSwitch; // TODO - finish implementing this to fix shit
     [SerializeField] private Player_Walk[] playerWalk;
     [SerializeField] private Player_Jump[] playerJump;
-    private int playerIndex = 0;
+    private int playerIndex = 1; // TODO THIS IS DEBUGGGG REMEMBER
 
     private void Start()
     {
@@ -15,6 +17,7 @@ public class PlayerHandler : MonoBehaviour
             playerWalk[i].enabled = false;
             playerJump[i].enabled = false;
         }
+        OnTimelineSwitch?.Invoke((CurrentPlayer)playerIndex);
     }
     private void OnEnable()
     {
@@ -37,6 +40,7 @@ public class PlayerHandler : MonoBehaviour
         {
             playerIndex = 0;
         }
+        OnTimelineSwitch?.Invoke((CurrentPlayer)playerIndex);
     }
 
     private void HandleSwitch()

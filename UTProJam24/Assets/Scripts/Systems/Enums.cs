@@ -19,3 +19,23 @@ public enum ItemType
     Alcohol,
     Food
 }
+
+public enum ObstacleType
+{
+    Fire,
+    WaterLeak,
+    AirPressure
+}
+
+public enum EndingType
+{
+    BadEnding, // explodes
+    GoodEnding, // city is saved
+    SecretEnding // no clue yet
+}
+
+public enum CurrentPlayer
+{
+    Past,
+    Present
+}
