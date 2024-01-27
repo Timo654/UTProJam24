@@ -185,6 +185,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenShelf",
+                    "type": "Button",
+                    "id": "ac270c19-daf9-4cf7-b5b7-34c650ba0070",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -361,6 +370,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e099cbfd-b5b5-4130-8b49-84fe7bd9cd42",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenShelf",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -207,6 +207,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenShelf"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac270c19-daf9-4cf7-b5b7-34c650ba0070"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -385,6 +394,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e099cbfd-b5b5-4130-8b49-84fe7bd9cd42"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenShelf"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -513,6 +533,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_SwitchCamera = m_Gameplay.FindAction("SwitchCamera", throwIfNotFound: true);
+        m_Gameplay_OpenShelf = m_Gameplay.FindAction("OpenShelf", throwIfNotFound: true);
         // Cheats
         m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
         m_Cheats_ToggleUI = m_Cheats.FindAction("ToggleUI", throwIfNotFound: true);
@@ -653,6 +674,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_SwitchCamera;
+    private readonly InputAction m_Gameplay_OpenShelf;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -660,6 +682,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @SwitchCamera => m_Wrapper.m_Gameplay_SwitchCamera;
+        public InputAction @OpenShelf => m_Wrapper.m_Gameplay_OpenShelf;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -678,6 +701,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwitchCamera.started += instance.OnSwitchCamera;
             @SwitchCamera.performed += instance.OnSwitchCamera;
             @SwitchCamera.canceled += instance.OnSwitchCamera;
+            @OpenShelf.started += instance.OnOpenShelf;
+            @OpenShelf.performed += instance.OnOpenShelf;
+            @OpenShelf.canceled += instance.OnOpenShelf;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -691,6 +717,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwitchCamera.started -= instance.OnSwitchCamera;
             @SwitchCamera.performed -= instance.OnSwitchCamera;
             @SwitchCamera.canceled -= instance.OnSwitchCamera;
+            @OpenShelf.started -= instance.OnOpenShelf;
+            @OpenShelf.performed -= instance.OnOpenShelf;
+            @OpenShelf.canceled -= instance.OnOpenShelf;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -808,6 +837,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSwitchCamera(InputAction.CallbackContext context);
+        void OnOpenShelf(InputAction.CallbackContext context);
     }
     public interface ICheatsActions
     {
