@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour
     const string sid = "00000000-0000-0000-0000-000000000000";
     static readonly Guid nullGuid = new Guid(sid);
 
-    private List<EventInstance> eventInstances;
+    private List<EventInstance> eventInstances = new();
     class TimelineInfo
     {
         public FMOD.StringWrapper LastMarker = new();

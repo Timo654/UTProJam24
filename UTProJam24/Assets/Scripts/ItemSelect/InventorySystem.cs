@@ -8,9 +8,9 @@ public class InventorySystem : MonoBehaviour
     public static Action<ItemData> ItemAdded;
     public static Action<ItemData> ItemConsumed;
     public int inventorySize = 2;
-    public List<ItemData> items;
+    public List<ItemData> items = new();
     [SerializeField] private GameObject itemPrefab;
-    private List<Item> displayItemList;
+    private List<Item> displayItemList = new();
     private void OnEnable()
     {
         Item.TryAddItemToInventory += AddItem;
@@ -46,6 +46,7 @@ public class InventorySystem : MonoBehaviour
     {
         var button = Instantiate(itemPrefab, transform.position, transform.rotation, transform);
         var buttonScript = button.GetComponent<Item>();
+        displayItemList.Add(buttonScript);
         buttonScript.SetupItem(item, false);
         Debug.Log($"added {item}");
     }
@@ -57,6 +58,7 @@ public class InventorySystem : MonoBehaviour
         {
             if (displayItem.itemData == item)
             {
+                Debug.Log("item found");
                 Destroy(displayItem.gameObject);
                 break;
             }
