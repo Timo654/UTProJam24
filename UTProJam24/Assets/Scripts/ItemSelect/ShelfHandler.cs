@@ -15,7 +15,7 @@ public class ShelfHandler : MonoBehaviour
     private bool shelfOpen = false;
     private void Awake()
     {
-        hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode
+        hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
         playerControls = new PlayerControls();
         openAction = playerControls.Gameplay.OpenShelf;
     }

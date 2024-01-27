@@ -5,7 +5,7 @@ public class PlayerHandler : MonoBehaviour
     //hardcoded two players yeah
     [SerializeField] private Player_Walk[] playerWalk;
     [SerializeField] private Player_Jump[] playerJump;
-    private int playerIndex = 0;
+    private int playerIndex = 1; // TODO THIS IS DEBUGGGG REMEMBER
 
     private void Start()
     {

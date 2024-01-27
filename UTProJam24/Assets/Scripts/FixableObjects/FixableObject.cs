@@ -1,5 +1,7 @@
 using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FixableObject : MonoBehaviour
 {
@@ -8,6 +10,18 @@ public class FixableObject : MonoBehaviour
     public float itemHealth = 200f;
     public ObstacleType obstacleType;
     private bool currentlyActive = false;
+    private Animator animator;
+    private bool interactable = false;
+    private TextMeshPro hintText;
+    PlayerControls playerControls;
+    InputAction openAction;
+    private void Awake()
+    {
+        hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
+        playerControls = new PlayerControls();
+        openAction = playerControls.Gameplay.OpenShelf;
+        animator = GetComponent<Animator>();
+    }
     private void Start()
     {
         switch (obstacleType)
@@ -26,6 +40,26 @@ public class FixableObject : MonoBehaviour
                 break;
         }
     }
+    private void OnEnable()
+    {
+        openAction.Enable();
+        openAction.performed += ShelfOpen;
+    }
+
+    private void OnDisable()
+    {
+        openAction.Disable();
+        openAction.performed -= ShelfOpen;
+    }
+
+    public void ShelfOpen(InputAction.CallbackContext context)
+    {
+        if (interactable)
+        {
+            Debug.Log("interacting with object");
+        }
+    }
+
     private void Update()
     {
         switch (obstacleType)
@@ -61,11 +95,33 @@ public class FixableObject : MonoBehaviour
     }
     public void ActivateObstacle()
     {
+        if (currentlyActive) return;
         currentlyActive = true;
+        animator.SetBool("Active", true);
     }
 
     public void DeactivateObstacle()
     {
+        if (!currentlyActive) return;
         currentlyActive = false;
+        animator.SetBool("Active", false);
+    }
+
+    public bool IsCurrentlyActive()
+    {
+        return currentlyActive;
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log("Got near a shelf.");
+        hintText.enabled = true;
+        interactable = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        hintText.enabled = false;
+        interactable = false;
     }
 }

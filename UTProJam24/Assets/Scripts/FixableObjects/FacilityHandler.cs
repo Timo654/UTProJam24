@@ -3,18 +3,21 @@ using UnityEngine;
 
 public class FacilityHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Start is called before the first frame updatep
     public static Action<EndingType> OnFacilityDestroyed;
     public static Action<EndingType> OnFacilitySaved;
     public static Action<float> OnFacilityHPDown;
     public static Action<float> SetInitialFacilityHP;
     private float facilityHealth = 1000f;
     [SerializeField] private Timer timer;
-
+    [SerializeField] private float accidentDelay = 5f; // how often accidents happen, approximately
+    [SerializeField] FixableObject[] fixableObjects;
+    private float nextCheckTime;
     void Start()
     {
         SetInitialFacilityHP?.Invoke(facilityHealth);
         timer.StartTimer(120f);
+        nextCheckTime = Time.time + 10f; // add 5 seconds of safe time MIGHT NEED TO REWORK WE KINDA NEED A TUTORIAL OR STH
     }
 
     // Update is called once per frame
@@ -23,6 +26,15 @@ public class FacilityHandler : MonoBehaviour
         if (facilityHealth <= 0f)
         {
             OnFacilityDestroyed.Invoke(EndingType.BadEnding);
+        }
+        if (Time.time > nextCheckTime)
+        {
+            nextCheckTime += accidentDelay;
+            var obj = fixableObjects[UnityEngine.Random.Range(0, fixableObjects.Length)];
+            if (!obj.IsCurrentlyActive())
+            {
+                obj.ActivateObstacle();
+            }   
         }
     }
 

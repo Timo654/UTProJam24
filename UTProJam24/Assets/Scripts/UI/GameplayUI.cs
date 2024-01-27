@@ -8,6 +8,7 @@ public class GameplayUI : MonoBehaviour
     private float facilityHealth;
     private float visualFacilityHealth;
     public float hpCounterSpeed = 20f;
+    private float initialFacilityHP;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +31,9 @@ public class GameplayUI : MonoBehaviour
     private void UpdateInitialFacilityHP(float hp)
     {
         facilityHealth = hp;
+        initialFacilityHP = hp;
         visualFacilityHealth = hp;
-        facilityHPText.text = $"Facility HP: {Mathf.RoundToInt(visualFacilityHealth)}/{facilityHealth}";
+        facilityHPText.text = $"Facility HP: {Mathf.RoundToInt(visualFacilityHealth)}/{initialFacilityHP}";
     }
 
     private void Update()
@@ -39,7 +41,7 @@ public class GameplayUI : MonoBehaviour
         if (facilityHealth != visualFacilityHealth)
         {
             visualFacilityHealth = Mathf.MoveTowards(visualFacilityHealth, facilityHealth, hpCounterSpeed * Time.deltaTime);
-            facilityHPText.text = $"Facility HP: {Mathf.RoundToInt(visualFacilityHealth)}/{facilityHealth}";
+            facilityHPText.text = $"Facility HP: {Mathf.RoundToInt(visualFacilityHealth)}/{initialFacilityHP}";
         }
     }
     void UpdateTimerText(string time)
