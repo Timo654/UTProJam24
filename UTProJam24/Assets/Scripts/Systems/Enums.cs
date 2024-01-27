@@ -33,3 +33,9 @@ public enum EndingType
     GoodEnding, // city is saved
     SecretEnding // no clue yet
 }
+
+public enum CurrentPlayer
+{
+    Past,
+    Present
+}

@@ -14,6 +14,13 @@ public class InventorySystem : MonoBehaviour
     private void OnEnable()
     {
         Item.TryAddItemToInventory += AddItem;
+        Item.ItemUseConfirm += RemoveItem;
+    }
+
+    private void OnDisable()
+    {
+        Item.TryAddItemToInventory -= AddItem;
+        Item.ItemUseConfirm -= RemoveItem;
     }
     private void AddItem(ItemData item)
     {
@@ -30,9 +37,9 @@ public class InventorySystem : MonoBehaviour
 
     private void RemoveItem(ItemData item)
     {
+        RemoveDisplayItem(item);
         items.Remove(item);
         ItemConsumed?.Invoke(item);
-        RemoveDisplayItem(item);
     }
 
     private void AddDisplayItem(ItemData item)
@@ -45,6 +52,7 @@ public class InventorySystem : MonoBehaviour
 
     private void RemoveDisplayItem(ItemData item)
     {
+        // FIXME - game seems to die here when using an item?
         foreach (var displayItem in displayItemList)
         {
             if (displayItem.itemData == item)

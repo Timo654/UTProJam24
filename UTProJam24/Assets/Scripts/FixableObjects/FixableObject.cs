@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class FixableObject : MonoBehaviour
 {
+    public static Action ConfirmItemUse;
     public static Action<float> DamageFacility;
     public float hitDamage = 1f;
     public float itemHealth = 200f;
@@ -13,6 +14,8 @@ public class FixableObject : MonoBehaviour
     private Animator animator;
     private bool interactable = false;
     private TextMeshPro hintText;
+    private bool inTriggerArea = false;
+    private bool currentlySelecting = false;
     PlayerControls playerControls;
     InputAction openAction;
     private void Awake()
@@ -24,6 +27,7 @@ public class FixableObject : MonoBehaviour
     }
     private void Start()
     {
+        // TODO - add fmod audio init stuff here
         switch (obstacleType)
         {
             case ObstacleType.Fire:
@@ -43,23 +47,35 @@ public class FixableObject : MonoBehaviour
     private void OnEnable()
     {
         openAction.Enable();
-        openAction.performed += ShelfOpen;
+        openAction.performed += FixObject;
+        PlayerHandler.OnTimelineSwitch += HandleTimelineSwitch;
+        Item.ItemUseConfirm += HandleItemSelect;
     }
 
     private void OnDisable()
     {
         openAction.Disable();
-        openAction.performed -= ShelfOpen;
+        openAction.performed -= FixObject;
+        PlayerHandler.OnTimelineSwitch -= HandleTimelineSwitch;
+        Item.ItemUseConfirm -= HandleItemSelect;
     }
 
-    public void ShelfOpen(InputAction.CallbackContext context)
+    public void FixObject(InputAction.CallbackContext context)
     {
         if (interactable)
         {
             Debug.Log("interacting with object");
+            currentlySelecting = true;
+            ConfirmItemUse?.Invoke();
         }
     }
 
+    private void HandleItemSelect(ItemData item)
+    {
+        if (!currentlySelecting) return;
+        // TODO - implement strengths, weaknesses and instakills
+        DeactivateObstacle(); // fix item 
+    }
     private void Update()
     {
         switch (obstacleType)
@@ -95,15 +111,37 @@ public class FixableObject : MonoBehaviour
     }
     public void ActivateObstacle()
     {
+        // start fmod sfx here
         if (currentlyActive) return;
         currentlyActive = true;
+        if (inTriggerArea)
+        {
+            hintText.enabled = true;
+            interactable = true;
+        }
         animator.SetBool("Active", true);
+    }
+
+    void HandleTimelineSwitch(CurrentPlayer player)
+    {
+        switch (player)
+        {
+            case CurrentPlayer.Past:
+                openAction.Disable();
+                break;
+            case CurrentPlayer.Present:
+                openAction.Enable();
+                break;
+        }
     }
 
     public void DeactivateObstacle()
     {
+        // end fmod sfx
         if (!currentlyActive) return;
         currentlyActive = false;
+        hintText.enabled = false;
+        interactable = false;
         animator.SetBool("Active", false);
     }
 
@@ -114,13 +152,17 @@ public class FixableObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Got near a shelf.");
+        inTriggerArea = true;
+        if (!currentlyActive) return;
+        Debug.Log("Got near an object.");
         hintText.enabled = true;
         interactable = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        inTriggerArea = false;
+        if (!currentlyActive) return;
         hintText.enabled = false;
         interactable = false;
     }

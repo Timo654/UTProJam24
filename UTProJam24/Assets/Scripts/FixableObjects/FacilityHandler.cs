@@ -10,7 +10,7 @@ public class FacilityHandler : MonoBehaviour
     public static Action<float> SetInitialFacilityHP;
     private float facilityHealth = 1000f;
     [SerializeField] private Timer timer;
-    [SerializeField] private float accidentDelay = 5f; // how often accidents happen, approximately
+    [SerializeField] private float accidentDelay = 8f; // how often accidents happen, approximately
     [SerializeField] FixableObject[] fixableObjects;
     private float nextCheckTime;
     void Start()
@@ -29,7 +29,7 @@ public class FacilityHandler : MonoBehaviour
         }
         if (Time.time > nextCheckTime)
         {
-            nextCheckTime += accidentDelay;
+            nextCheckTime += Time.time + accidentDelay;
             var obj = fixableObjects[UnityEngine.Random.Range(0, fixableObjects.Length)];
             if (!obj.IsCurrentlyActive())
             {
