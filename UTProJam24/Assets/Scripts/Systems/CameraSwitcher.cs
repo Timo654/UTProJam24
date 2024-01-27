@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraSwitcher : MonoBehaviour
 {
+    public static Action OnCameraSwitched;
+    public static Action OnStartCameraSwitch;
     [SerializeField] Camera pastCamera;
     [SerializeField] Camera futureCamera;
     private Animator cameraAnim;
@@ -35,12 +36,14 @@ public class CameraSwitcher : MonoBehaviour
     {
         if (!cameraAnim.GetCurrentAnimatorStateInfo(0).IsName("CameraAnimation"))
         {
+            OnStartCameraSwitch.Invoke();
             cameraAnim.SetTrigger("Fade");
         }
     }
 
     public void ToggleCamera()
     {
+        OnCameraSwitched.Invoke();
         pastCamera.enabled = !pastCamera.enabled;
         futureCamera.enabled = !futureCamera.enabled;
     }

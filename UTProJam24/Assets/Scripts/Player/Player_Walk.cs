@@ -70,6 +70,7 @@ public class Player_Walk : MonoBehaviour
     }
     private void OnDisable()
     {
+        directionX = 0f;
         PauseMenuController.GamePaused -= PauseToggled;
         move.started -= OnMovement;
         move.canceled -= OnMovement;
@@ -87,6 +88,7 @@ public class Player_Walk : MonoBehaviour
         }
         else
         {
+
             directionX = 0;
         }
     }
