@@ -19,3 +19,10 @@ public enum ItemType
     Alcohol,
     Food
 }
+
+public enum ObstacleType
+{
+    Fire,
+    WaterLeak,
+    AirPressure
+}
