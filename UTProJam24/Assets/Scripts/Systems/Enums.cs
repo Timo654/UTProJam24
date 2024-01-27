@@ -16,5 +16,6 @@ public enum ItemType
     Tape,
     Gun,
     Gasoline,
-    Alcohol
+    Alcohol,
+    Food
 }
