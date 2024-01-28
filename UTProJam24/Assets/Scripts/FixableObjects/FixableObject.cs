@@ -176,7 +176,6 @@ public class FixableObject : MonoBehaviour
             case ObstacleType.AirPressure:
                 if (currentlyActive)
                 {
-                    Debug.Log("do be active");
                     if (itemHealth > 0f)
                     {
                         // go down instead of damaging right away

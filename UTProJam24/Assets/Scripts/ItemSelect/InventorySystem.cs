@@ -33,7 +33,6 @@ public class InventorySystem : MonoBehaviour
             Debug.Log("INVENTORY FULL!!");
             InventoryFull?.Invoke();
             return;
-            // TODO - tell the player their inventory full
         }
 
         if (items.Contains(item))
@@ -68,6 +67,9 @@ public class InventorySystem : MonoBehaviour
         // FIXME - game seems to die here when using an item?
         foreach (var displayItem in displayItemList)
         {
+            if (displayItem == null) continue; // otherwise itll die when u have multiple of same item
+            Debug.Log(displayItem);
+            Debug.Log(item);
             if (displayItem.itemData == item)
             {
                 Debug.Log("item found");
