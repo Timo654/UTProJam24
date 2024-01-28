@@ -164,6 +164,7 @@ public class GameManager : MonoBehaviour
                     if (tutorialTimer > phaseStart + 3f)
                     {
                         tutorialMode = false;
+                        SaveManager.Instance.gameData.tutorialDone = true;
                         StartGame?.Invoke();
                     }
                 }

@@ -116,6 +116,10 @@ public class FixableObject : MonoBehaviour
                     case ItemType.Tiksu:
                         DeactivateObstacle(); // fix item 
                         break;
+                    case ItemType.Food:
+                        bool activate = UnityEngine.Random.value > 0.5f;
+                        if (activate) DeactivateObstacle();
+                        break;
                     default:
                         // do nothing
                         break;
