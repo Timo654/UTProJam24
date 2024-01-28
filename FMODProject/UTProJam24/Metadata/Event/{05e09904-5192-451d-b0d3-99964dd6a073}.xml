@@ -53,7 +53,7 @@
 			<destination>{ace65265-bd75-44bc-b745-db08dc6e9075}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{cbc58f2d-8250-4f2e-aca5-3635f89857bf}</destination>
+			<destination>{157cca46-0991-4d94-8086-6b8c13c61765}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{d1044c74-7233-45f8-8021-3c66e8233907}" />
@@ -181,7 +181,7 @@
 			<value>0.010764262648008612</value>
 		</property>
 		<property name="value">
-			<value>3</value>
+			<value>4.34912682</value>
 		</property>
 		<property name="curveShape">
 			<value>0.754543364</value>
@@ -192,7 +192,7 @@
 			<value>20</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-71.0058365</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{8f045089-ce22-47db-a9e4-a8d37476a4e3}">
@@ -200,7 +200,7 @@
 			<value>3.2000000000000002</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>1.34912658</value>
 		</property>
 		<property name="curveShape">
 			<value>1</value>
