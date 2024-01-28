@@ -47,6 +47,7 @@ public class FixableObject : MonoBehaviour
             case ObstacleType.AirPressure:
                 nextActivationAttempt = Time.time + 20f; // don't start it right away
                 arrowTransform = transform.GetChild(1);
+                MapArrowToValue(itemHealth);
                 // slowly decreases all the time. if it gets too low, the facility "broken" meter will fill fast
                 break;
             default:
@@ -149,9 +150,9 @@ public class FixableObject : MonoBehaviour
 
     void MapArrowToValue(float mapValue)
     {
-        // range: 180 to 0
+        // range: 120 to -110
         // values: 0 to 60
-        arrowTransform.rotation = Quaternion.AngleAxis(math.remap(0, initialHP, 180f, 0, mapValue), Vector3.forward);
+        arrowTransform.rotation = Quaternion.AngleAxis(math.remap(0, initialHP, 120f, -110f, mapValue), Vector3.forward);
     }
     private void Update()
     {

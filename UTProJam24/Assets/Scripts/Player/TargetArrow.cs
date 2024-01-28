@@ -33,7 +33,9 @@ public class TargetArrow : MonoBehaviour
         {
             transform.localScale = parent.localScale;
         }
-        var dir = Target.position - transform.position;
+        Vector3 funnyWorkaround = new Vector3(Target.position.x, transform.position.y, Target.position.z);
+        var dir = funnyWorkaround - transform.position; // too lazy to figure out math rn
+
         if (dir.magnitude < HideDistance)
         {
             SetChildrenActive(false);
@@ -44,7 +46,7 @@ public class TargetArrow : MonoBehaviour
             var angle = -Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             // make the direction somewhat correct when left side
             if (angle < -100f)
-            {
+            { 
                 spriteTransform.localPosition = new Vector3(initialArrowPos.x + 1.5f, -initialArrowPos.y, initialArrowPos.z);
             }
             else
