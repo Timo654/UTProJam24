@@ -7,6 +7,7 @@ public class InventorySystem : MonoBehaviour
     // FIXME - duplicate items do not show up properly in UI
     public static Action<ItemData> ItemAdded;
     public static Action<ItemData> ItemConsumed;
+    public static Action InventoryFull;
     public int inventorySize = 2;
     public List<ItemData> items = new();
     [SerializeField] private GameObject itemPrefab;
@@ -15,18 +16,21 @@ public class InventorySystem : MonoBehaviour
     {
         Item.TryAddItemToInventory += AddItem;
         Item.ItemUseConfirm += RemoveItem;
+        PickuppableObject.PickUpItem += AddItem;
     }
 
     private void OnDisable()
     {
         Item.TryAddItemToInventory -= AddItem;
         Item.ItemUseConfirm -= RemoveItem;
+        PickuppableObject.PickUpItem -= AddItem;
     }
     private void AddItem(ItemData item)
     {
         if (inventorySize <= items.Count)
         {
             Debug.Log("INVENTORY FULL!!");
+            InventoryFull?.Invoke();
             return;
             // TODO - tell the player their inventory full
         }
