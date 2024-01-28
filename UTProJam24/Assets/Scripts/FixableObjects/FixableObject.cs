@@ -61,6 +61,7 @@ public class FixableObject : MonoBehaviour
             if (obstacleType == ObstacleType.AirPressure)
             {
                 itemHealth += 10f;
+                fixSound.start();
                 if (itemHealth > initialHP)
                 {
                     interactable = false;
@@ -98,6 +99,7 @@ public class FixableObject : MonoBehaviour
                         break;
                     case ItemType.Tiksu:
                     case ItemType.FireExtinguisher:
+                    case ItemType.Hammer:
                         DeactivateObstacle(); // fix item 
                         break;
                     default:
@@ -154,15 +156,18 @@ public class FixableObject : MonoBehaviour
         {
             case ObstacleType.Fire:
                 burningSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.FireSound);
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(burningSound, GetComponent<Transform>());
                 fixSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.FireExting);
                 // will start burning at some point. burning slowly fills the facility "broken" meter
                 break;
             case ObstacleType.WaterLeak:
                 burningSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.LeakSound);
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(burningSound, GetComponent<Transform>());
                 fixSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.FixWrench);
                 // will start leaking at some point. leaking slowly fills the facility "broken" meter
                 break;
             case ObstacleType.AirPressure:
+                fixSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.OxygenPump);
                 // TODO - air pressure
                 nextActivationAttempt = Time.time + 20f; // don't start it right away
                 arrowTransform = transform.GetChild(1);

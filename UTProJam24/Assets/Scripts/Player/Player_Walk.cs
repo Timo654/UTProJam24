@@ -35,11 +35,18 @@ public class Player_Walk : MonoBehaviour
     private bool isPaused = false;
     //public ParticleSystem dust;
     // Audio
-    //public EventInstance playerFootsteps;
-
+    public EventInstance playerFootsteps;
+    public bool isFuture = false;
     private void Start()
     {
-        // playerFootsteps = AudioManager.Instance.CreateInstance(FMODEvents.instance.playerFootsteps);
+        if (isFuture)
+        {
+            playerFootsteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.StepsFuture);
+        }
+        else
+        {
+            playerFootsteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.StepsPast);
+        }
     }
 
     //public void CreateDust()
@@ -150,7 +157,7 @@ public class Player_Walk : MonoBehaviour
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 
         // audio stuff. might rewrite this, not sure yet
-        /*if (velocity.x != 0 & pressingKey)
+        if (velocity.x != 0 & pressingKey)
         {
             // get the playback state
             PLAYBACK_STATE playbackState;
@@ -163,7 +170,7 @@ public class Player_Walk : MonoBehaviour
         else
         {
             playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
-        }*/
+        }
         //Update the Rigidbody with this new velocity
         body.velocity = velocity;
     }

@@ -121,6 +121,13 @@ MonoBehaviour:
       Data3: -143048029
       Data4: 2061794519
     Path: event:/SFX/LeakSound
+  <OxygenPump>k__BackingField:
+    Guid:
+      Data1: -2004763460
+      Data2: 1157763902
+      Data3: -1859805547
+      Data4: 1641425222
+    Path: event:/SFX/OxygenPump
   <ButtonClick>k__BackingField:
     Guid:
       Data1: -1131144020
