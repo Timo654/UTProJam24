@@ -64,7 +64,6 @@ public class FacilityHandler : MonoBehaviour
         FixableObject.OnAirPressureLeak -= InitializeArrow;
         Timer.OnZero -= FacilitySaved;
     }
-
     private void FacilitySaved()
     {
         OnFacilitySaved?.Invoke(EndingType.GoodEnding);

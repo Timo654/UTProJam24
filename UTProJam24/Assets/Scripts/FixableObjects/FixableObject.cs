@@ -9,7 +9,6 @@ public class FixableObject : MonoBehaviour
     public static Action ConfirmItemUse;
     public static Action<FixableObject> OnAirPressureLeak;
     public static Action<float> DamageFacility;
-    public static Action IssueFixed;
     public Color arrowColour = Color.white; // arrow to point to the thing
     public float hitDamage = 1f;
     public float itemHealth = 60f; // hp is used for pressure gauge max value
@@ -240,7 +239,6 @@ public class FixableObject : MonoBehaviour
         currentlyActive = false;
         hintText.enabled = false;
         interactable = false;
-        IssueFixed?.Invoke();
         if (obstacleType != ObstacleType.AirPressure) animator.SetBool("Active", false);
     }
 
