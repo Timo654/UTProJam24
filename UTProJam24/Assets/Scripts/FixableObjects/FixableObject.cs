@@ -74,7 +74,51 @@ public class FixableObject : MonoBehaviour
     {
         if (!currentlySelecting) return;
         // TODO - implement strengths, weaknesses and instakills
-        DeactivateObstacle(); // fix item 
+        switch (obstacleType)
+        {
+            case ObstacleType.Fire:
+                // will start burning at some point. burning slowly fills the facility "broken" meter
+                switch (item.type)
+                {
+                    case ItemType.Gasoline:
+                    case ItemType.Alcohol:
+                        // deal a lot of dmg
+                        DamageFacility.Invoke(hitDamage * 50f);
+                        break;
+                    case ItemType.FireExtinguisher:
+                        DeactivateObstacle(); // fix item 
+                        break;
+                    default:
+                        // do nothing
+                        break;
+                }
+                break;
+            case ObstacleType.WaterLeak:
+                // will start leaking at some point. leaking slowly fills the facility "broken" meter
+                switch (item.type)
+                {
+                    case ItemType.Gasoline:
+                    case ItemType.Alcohol:
+                        // deal a lot of dmg
+                        DamageFacility.Invoke(hitDamage * 50f);
+                        break;
+                    case ItemType.Wrench:
+                    case ItemType.Tape:
+                        DeactivateObstacle(); // fix item 
+                        break;
+                    default:
+                        // do nothing
+                        break;
+                }
+                break;
+            case ObstacleType.AirPressure:
+                // TODO - unimplemented
+                break;
+            default:
+                Debug.LogWarning($"Unknown obstacle {obstacleType}");
+                break;
+        }
+        
     }
     private void Update()
     {
