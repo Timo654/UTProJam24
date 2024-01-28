@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -14,6 +15,7 @@ public class ShelfHandler : MonoBehaviour
     InputAction openAction;
     private bool interactable = false;
     private bool shelfOpen = false;
+    private EventInstance boxSound;
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
@@ -21,6 +23,10 @@ public class ShelfHandler : MonoBehaviour
         openAction = playerControls.Gameplay.OpenShelf;
     }
 
+    private void Start()
+    {
+        boxSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.ToolboxSound);
+    }
     private void OnEnable()
     {
         InventorySystem.ItemAdded += RemoveItem;
@@ -45,6 +51,7 @@ public class ShelfHandler : MonoBehaviour
 
     private void CloseUI()
     {
+        boxSound.start();
         shelfOpen = false;
         OnCloseShelf?.Invoke();
     }
@@ -67,6 +74,7 @@ public class ShelfHandler : MonoBehaviour
     {
         if (interactable && !shelfOpen)
         {
+            boxSound.start();
             shelfOpen = true;
             Debug.Log("opening shelf");
             OnOpenShelf?.Invoke(items);
