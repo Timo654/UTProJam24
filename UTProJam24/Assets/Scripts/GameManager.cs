@@ -1,8 +1,9 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static Action StartGame;
     [SerializeField] private EndingData[] endings;
     void Start()
     {
@@ -20,15 +21,17 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         Debug.Log("start!");
+        StartGame?.Invoke();
     }
 
     private void HandleEnding(EndingType endingType)
     {
         Debug.Log("ending!");
         Debug.Log(endingType);
-        foreach(EndingData ending in endings)
+        foreach (EndingData ending in endings)
         {
-            if (ending.endingType == endingType) {
+            if (ending.endingType == endingType)
+            {
                 SaveManager.Instance.runtimeData.currentEnding = ending;
                 break;
             }

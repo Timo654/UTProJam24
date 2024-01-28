@@ -24,6 +24,7 @@ public class FixableObject : MonoBehaviour
     PlayerControls playerControls;
     InputAction openAction;
     private float initialHP;
+    private bool started = false;
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
@@ -32,34 +33,13 @@ public class FixableObject : MonoBehaviour
         animator = GetComponent<Animator>();
         initialHP = itemHealth;
     }
-    private void Start()
-    {
-        // TODO - add fmod audio init stuff here
-        switch (obstacleType)
-        {
-            case ObstacleType.Fire:
-                // will start burning at some point. burning slowly fills the facility "broken" meter
-                break;
-            case ObstacleType.WaterLeak:
-                // will start leaking at some point. leaking slowly fills the facility "broken" meter
-                break;
-            case ObstacleType.AirPressure:
-                nextActivationAttempt = Time.time + 20f; // don't start it right away
-                arrowTransform = transform.GetChild(1);
-                MapArrowToValue(itemHealth);
-                // slowly decreases all the time. if it gets too low, the facility "broken" meter will fill fast
-                break;
-            default:
-                Debug.LogWarning($"Unknown obstacle {obstacleType}");
-                break;
-        }
-    }
     private void OnEnable()
     {
         openAction.Enable();
         openAction.performed += FixObject;
         PlayerHandler.OnTimelineSwitch += HandleTimelineSwitch;
         Item.ItemUseConfirm += HandleItemSelect;
+        GameManager.StartGame += HandleStart;
     }
 
     private void OnDisable()
@@ -67,6 +47,7 @@ public class FixableObject : MonoBehaviour
         openAction.Disable();
         openAction.performed -= FixObject;
         PlayerHandler.OnTimelineSwitch -= HandleTimelineSwitch;
+        GameManager.StartGame -= HandleStart;
         Item.ItemUseConfirm -= HandleItemSelect;
     }
 
@@ -155,8 +136,33 @@ public class FixableObject : MonoBehaviour
         // values: 0 to 60
         arrowTransform.rotation = Quaternion.AngleAxis(math.remap(0, initialHP, 120f, -110f, mapValue), Vector3.forward);
     }
+
+    private void HandleStart()
+    {
+        // TODO - add fmod audio init stuff here
+        switch (obstacleType)
+        {
+            case ObstacleType.Fire:
+                // will start burning at some point. burning slowly fills the facility "broken" meter
+                break;
+            case ObstacleType.WaterLeak:
+                // will start leaking at some point. leaking slowly fills the facility "broken" meter
+                break;
+            case ObstacleType.AirPressure:
+                nextActivationAttempt = Time.time + 20f; // don't start it right away
+                arrowTransform = transform.GetChild(1);
+                MapArrowToValue(itemHealth);
+                // slowly decreases all the time. if it gets too low, the facility "broken" meter will fill fast
+                break;
+            default:
+                Debug.LogWarning($"Unknown obstacle {obstacleType}");
+                break;
+        }
+        started = true;
+    }
     private void Update()
     {
+        if (!started) return;
         switch (obstacleType)
         {
             case ObstacleType.Fire:

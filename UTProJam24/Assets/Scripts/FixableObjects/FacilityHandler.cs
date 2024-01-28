@@ -17,16 +17,20 @@ public class FacilityHandler : MonoBehaviour
     [SerializeField] GameObject directionArrowPrefab;
     [SerializeField] Transform futurePlayer;
     private float nextCheckTime;
-    void Start()
+    private bool started = false;
+
+
+    void HandleStart()
     {
         SetInitialFacilityHP?.Invoke(facilityHealth);
         timer.StartTimer(gameLength);
         nextCheckTime = Time.time + 10f; // add 5 seconds of safe time MIGHT NEED TO REWORK WE KINDA NEED A TUTORIAL OR STH
+        started = true;
     }
-
     // Update is called once per frame
     void Update()
     {
+        if (!started) { return; }
         if (facilityHealth <= 0f)
         {
             OnFacilityDestroyed.Invoke(EndingType.BadEnding);
@@ -56,6 +60,7 @@ public class FacilityHandler : MonoBehaviour
     {
         FixableObject.DamageFacility += DecreaseFacilityHealth;
         FixableObject.OnAirPressureLeak += InitializeArrow;
+        GameManager.StartGame += HandleStart;
         Timer.OnZero += FacilitySaved;
     }
 
@@ -63,6 +68,7 @@ public class FacilityHandler : MonoBehaviour
     {
         FixableObject.DamageFacility -= DecreaseFacilityHealth;
         FixableObject.OnAirPressureLeak -= InitializeArrow;
+        GameManager.StartGame += HandleStart;
         Timer.OnZero -= FacilitySaved;
     }
     private void FacilitySaved()
