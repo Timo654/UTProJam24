@@ -72,7 +72,10 @@ public class DialogueManager : MonoBehaviour
         topTutorialText.text = TextParser(currentTopDialogue, currentTopLine);
         topTutorialBox.SetActive(true);
     }
-
+    public void ResetTopDialogue()
+    {
+        currentTopDialogue = null;
+    }
     public string TextParser(DialogueAsset dialogue, int currentIndex)
     {
         string inputString;

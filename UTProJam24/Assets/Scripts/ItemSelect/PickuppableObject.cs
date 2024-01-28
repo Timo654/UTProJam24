@@ -11,7 +11,7 @@ public class PickuppableObject : MonoBehaviour
     PlayerControls playerControls;
     InputAction openAction;
     private bool pickupStarted = false;
-    private bool interactable = true;
+    private bool interactable = false;
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
