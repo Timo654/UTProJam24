@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4da734fbfd735f42ab70ff2c556821c, type: 3}
-  m_Name: InvFull
+  m_Name: ItemExists
   m_EditorClassIdentifier: 
   dialogue:
-  - Inventory full!
+  - I think I already have this...
   isInputRelated: 0
   dialogueMobile: []
   dialogueXBOX: []

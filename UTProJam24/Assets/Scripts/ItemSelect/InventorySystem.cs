@@ -8,6 +8,7 @@ public class InventorySystem : MonoBehaviour
     public static Action<ItemData> ItemAdded;
     public static Action<ItemData> ItemConsumed;
     public static Action InventoryFull;
+    public static Action ItemAlreadyInInventory;
     public int inventorySize = 2;
     public List<ItemData> items = new();
     [SerializeField] private GameObject itemPrefab;
@@ -33,6 +34,13 @@ public class InventorySystem : MonoBehaviour
             InventoryFull?.Invoke();
             return;
             // TODO - tell the player their inventory full
+        }
+
+        if (items.Contains(item))
+        {
+            Debug.Log("ITEM ALREADY EXISTS!");
+            ItemAlreadyInInventory?.Invoke();
+            return;
         }
         items.Add(item);
         ItemAdded?.Invoke(item);
