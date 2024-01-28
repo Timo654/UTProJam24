@@ -23,6 +23,7 @@ public class ConfirmItemUsage : MonoBehaviour
     }
     public void OnShowConfirmation()
     {
+        if (itemList.parent.gameObject.activeSelf) return;
         foreach (var item in inventory.items)
         {
             var button = Instantiate(itemPrefab, itemList.position, itemList.rotation, itemList);
