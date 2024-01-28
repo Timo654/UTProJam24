@@ -15,6 +15,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference ToolboxSound { get; private set; }
     [field: SerializeField] public EventReference FireSound { get; private set; }
     [field: SerializeField] public EventReference LeakSound { get; private set; }
+    [field: SerializeField] public EventReference OxygenPump { get; private set; }
     
     [field: Header("UI")]
     [field: SerializeField] public EventReference ButtonClick { get; private set; }
