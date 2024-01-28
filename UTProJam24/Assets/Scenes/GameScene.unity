@@ -2911,6 +2911,8 @@ MonoBehaviour:
   fixableObjects:
   - {fileID: 844718990}
   - {fileID: 7411248650843041426}
+  directionArrowPrefab: {fileID: 7225849538304264847, guid: 468bbbdf9a5fea74dba58194887c655d, type: 3}
+  futurePlayer: {fileID: 1357907779}
 --- !u!1001 &1159695542
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b41084bfc0ed5408c0a05512798015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowColour: {r: 1, g: 0.679827, b: 0.2028302, a: 1}
   hitDamage: 1
   itemHealth: 200
   obstacleType: 0

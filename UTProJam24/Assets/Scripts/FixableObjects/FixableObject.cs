@@ -7,6 +7,8 @@ public class FixableObject : MonoBehaviour
 {
     public static Action ConfirmItemUse;
     public static Action<float> DamageFacility;
+    public static Action IssueFixed;
+    public Color arrowColour = Color.white; // arrow to point to the thing
     public float hitDamage = 1f;
     public float itemHealth = 200f;
     public ObstacleType obstacleType;
@@ -118,7 +120,7 @@ public class FixableObject : MonoBehaviour
                 Debug.LogWarning($"Unknown obstacle {obstacleType}");
                 break;
         }
-        
+
     }
     private void Update()
     {
@@ -186,6 +188,7 @@ public class FixableObject : MonoBehaviour
         currentlyActive = false;
         hintText.enabled = false;
         interactable = false;
+        IssueFixed?.Invoke();
         animator.SetBool("Active", false);
     }
 

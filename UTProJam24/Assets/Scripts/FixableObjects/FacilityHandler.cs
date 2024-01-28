@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FacilityHandler : MonoBehaviour
@@ -12,6 +13,9 @@ public class FacilityHandler : MonoBehaviour
     [SerializeField] private Timer timer;
     [SerializeField] private float accidentDelay = 8f; // how often accidents happen, approximately
     [SerializeField] FixableObject[] fixableObjects;
+    [SerializeField] GameObject directionArrowPrefab;
+    [SerializeField] Transform futurePlayer;
+    private List<FixableObject> burningObjects = new(); // use to guide arrow?
     private float nextCheckTime;
     void Start()
     {
@@ -34,22 +38,43 @@ public class FacilityHandler : MonoBehaviour
             if (!obj.IsCurrentlyActive())
             {
                 obj.ActivateObstacle();
-            }   
+                burningObjects.Add(obj);
+                var arrow = Instantiate(directionArrowPrefab, futurePlayer.position, futurePlayer.rotation, futurePlayer);
+                var arrowScript = arrow.GetComponent<TargetArrow>();
+                arrowScript.Setup(obj);
+            }
         }
     }
 
     private void OnEnable()
     {
         FixableObject.DamageFacility += DecreaseFacilityHealth;
+        FixableObject.IssueFixed += RemoveFixedObjects;
         Timer.OnZero += FacilitySaved;
     }
 
     private void OnDisable()
     {
         FixableObject.DamageFacility -= DecreaseFacilityHealth;
+        FixableObject.IssueFixed -= RemoveFixedObjects;
         Timer.OnZero -= FacilitySaved;
     }
 
+    private void RemoveFixedObjects()
+    {
+        List<FixableObject> removeList = new();
+        foreach (var item in burningObjects)
+        {
+            if (!item.IsCurrentlyActive())
+            {
+                removeList.Add(item);
+            }
+        }
+        foreach (var item in removeList)
+        {
+            burningObjects.Remove(item);
+        }
+    }
     private void FacilitySaved()
     {
         OnFacilitySaved?.Invoke(EndingType.GoodEnding);

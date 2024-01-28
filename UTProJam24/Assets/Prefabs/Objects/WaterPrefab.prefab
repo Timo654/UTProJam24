@@ -271,9 +271,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b41084bfc0ed5408c0a05512798015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowColour: {r: 0.20705767, g: 0.56808853, b: 0.9339623, a: 1}
   hitDamage: 1
   itemHealth: 200
-  obstacleType: 0
+  obstacleType: 1
 --- !u!95 &9217331725379268387
 Animator:
   serializedVersion: 5
