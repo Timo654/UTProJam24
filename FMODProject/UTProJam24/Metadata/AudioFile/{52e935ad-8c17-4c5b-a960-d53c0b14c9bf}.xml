@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{52e935ad-8c17-4c5b-a960-d53c0b14c9bf}">
+		<property name="assetPath">
+			<value>SFX/nextPageSound.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.7647165532879818</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a027f7d5-b7bc-437b-b22d-4b5090dc23d7}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         Debug.Log("start!");
+        AudioManager.Instance.InitializeMusic(FMODEvents.Instance.MainTheme);
+        AudioManager.Instance.StartMusic();
     }
 
     private void HandleEnding(EndingType endingType)

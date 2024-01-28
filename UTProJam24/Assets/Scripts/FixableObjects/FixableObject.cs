@@ -24,6 +24,7 @@ public class FixableObject : MonoBehaviour
     PlayerControls playerControls;
     InputAction openAction;
     private float initialHP;
+
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
@@ -35,6 +36,13 @@ public class FixableObject : MonoBehaviour
     private void Start()
     {
         // TODO - add fmod audio init stuff here
+
+        // fixWrench = AudioManager._instance.CreateInstance(FMODEvents.instance.FixWrench);
+        // fireSound = AudioManager._instance.CreateInstance(FMODEvents.instance.FireSound);
+        // leakSound = AudioManager._instance.CreateInstance(FMODEvents.instance.LeakSound);
+        // fireExtSound = AudioManager._instance.CreateInstance(FMODEvents.instance.FireExting);
+
+
         switch (obstacleType)
         {
             case ObstacleType.Fire:

@@ -28,8 +28,8 @@ public class CreditsHandler : MonoBehaviour
     {
         LevelChanger.Instance.FadeIn();
         // uncomment when we get credits music
-        //AudioManager.Instance.InitializeMusic(FMODEvents.Instance.CreditsTheme);
-        //AudioManager.Instance.StartMusic();
+        AudioManager.Instance.InitializeMusic(FMODEvents.Instance.CreditsTheme);
+        AudioManager.Instance.StartMusic();
     }
 
     public void Pause(InputAction.CallbackContext context) // we're just going to skip credits when esc is pressed
