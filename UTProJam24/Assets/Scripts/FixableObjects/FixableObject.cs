@@ -28,6 +28,7 @@ public class FixableObject : MonoBehaviour
     private bool started = false;
     private EventInstance burningSound;
     private EventInstance fixSound;
+    private EventInstance ethanolBreak;
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
@@ -95,6 +96,7 @@ public class FixableObject : MonoBehaviour
                     case ItemType.Gasoline:
                     case ItemType.Alcohol:
                         // deal a lot of dmg
+                        ethanolBreak.start();
                         DamageFacility.Invoke(hitDamage * 50f);
                         break;
                     case ItemType.Tiksu:
@@ -114,6 +116,7 @@ public class FixableObject : MonoBehaviour
                     case ItemType.Gasoline:
                     case ItemType.Alcohol:
                         // deal a lot of dmg
+                        ethanolBreak.start();
                         DamageFacility.Invoke(hitDamage * 50f);
                         break;
                     case ItemType.Wrench:
@@ -148,6 +151,7 @@ public class FixableObject : MonoBehaviour
 
     private void HandleStart()
     {
+        ethanolBreak = AudioManager.Instance.CreateInstance(FMODEvents.Instance.GlassBreak);
         // TODO - add fmod audio init stuff here
         // fireSound = AudioManager._instance.CreateInstance(FMODEvents.instance.FireSound);
         // leakSound = AudioManager._instance.CreateInstance(FMODEvents.instance.LeakSound);

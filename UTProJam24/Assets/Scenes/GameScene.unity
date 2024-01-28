@@ -3526,7 +3526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facilityHealth: 150
   timer: {fileID: 629801014}
-  gameLength: 75
+  gameLength: 100
   accidentDelay: 5
   fixableObjects:
   - {fileID: 844718990}
@@ -4487,7 +4487,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HP Left: 1000/1000'
+  m_text: 'Facility Health: 150/150'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c53ca3b00f759f34280e33eefd89d34f, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: b550aecc584f3c24e89c5716940c46cc, type: 2}
@@ -5857,7 +5857,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time Left: 120'
+  m_text: 'Time Left: 100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c53ca3b00f759f34280e33eefd89d34f, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: b550aecc584f3c24e89c5716940c46cc, type: 2}

@@ -188,7 +188,31 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6c681662bc2f6f14198049a5a1c238a5, type: 3}
   - {fileID: 21300000, guid: 3bfb43dd7b713f04496f9b09726251e2, type: 3}
   - {fileID: 21300000, guid: 8e794e38e4b95af488400571479c706e, type: 3}
-  sfxRef: []
+  sfxRef:
+  - Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  - Guid:
+      Data1: -335544554
+      Data2: 1341941909
+      Data3: -1326751847
+      Data4: -199738396
+    Path: event:/SFX/PageTurn
+  - Guid:
+      Data1: -335544554
+      Data2: 1341941909
+      Data3: -1326751847
+      Data4: -199738396
+    Path: event:/SFX/PageTurn
+  - Guid:
+      Data1: -335544554
+      Data2: 1341941909
+      Data3: -1326751847
+      Data4: -199738396
+    Path: event:/SFX/PageTurn
   music:
     Guid:
       Data1: 0
