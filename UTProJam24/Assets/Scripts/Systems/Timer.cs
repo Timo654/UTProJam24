@@ -31,7 +31,7 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         if (!counting) return;
-        time -= Time.unscaledDeltaTime;
+        time -= Time.deltaTime;
         if (time <= 0f) EndTimer(true);
         UpdateGUI.Invoke(GetTime());
     }

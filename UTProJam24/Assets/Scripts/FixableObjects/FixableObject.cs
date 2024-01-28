@@ -112,6 +112,7 @@ public class FixableObject : MonoBehaviour
                         // deal a lot of dmg
                         DamageFacility.Invoke(hitDamage * 50f);
                         break;
+                    case ItemType.Tiksu:
                     case ItemType.FireExtinguisher:
                         DeactivateObstacle(); // fix item 
                         break;
@@ -131,6 +132,7 @@ public class FixableObject : MonoBehaviour
                         break;
                     case ItemType.Wrench:
                     case ItemType.Tape:
+                    case ItemType.Tiksu:
                         DeactivateObstacle(); // fix item 
                         break;
                     default:
@@ -182,7 +184,7 @@ public class FixableObject : MonoBehaviour
                     }
                     else
                     {
-                        DamageFacility.Invoke(500f * Time.deltaTime);
+                        DamageFacility.Invoke(200f * Time.deltaTime);
                     }
                     MapArrowToValue(itemHealth);
                 }

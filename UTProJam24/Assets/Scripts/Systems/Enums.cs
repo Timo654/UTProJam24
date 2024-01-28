@@ -17,7 +17,8 @@ public enum ItemType
     Gun,
     Gasoline,
     Alcohol,
-    Food
+    Food,
+    Tiksu
 }
 
 public enum ObstacleType

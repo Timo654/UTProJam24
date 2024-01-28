@@ -9,8 +9,9 @@ public class FacilityHandler : MonoBehaviour
     public static Action<EndingType> OnFacilitySaved;
     public static Action<float> OnFacilityHPDown;
     public static Action<float> SetInitialFacilityHP;
-    private float facilityHealth = 1000f;
+    [SerializeField] private float facilityHealth = 400f;
     [SerializeField] private Timer timer;
+    [SerializeField] private float gameLength = 180f;
     [SerializeField] private float accidentDelay = 8f; // how often accidents happen, approximately
     [SerializeField] FixableObject[] fixableObjects;
     [SerializeField] GameObject directionArrowPrefab;
@@ -19,7 +20,7 @@ public class FacilityHandler : MonoBehaviour
     void Start()
     {
         SetInitialFacilityHP?.Invoke(facilityHealth);
-        timer.StartTimer(120f);
+        timer.StartTimer(gameLength);
         nextCheckTime = Time.time + 10f; // add 5 seconds of safe time MIGHT NEED TO REWORK WE KINDA NEED A TUTORIAL OR STH
     }
 
