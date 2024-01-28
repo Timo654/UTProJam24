@@ -74,6 +74,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void ResetTopDialogue()
     {
+        EndTopText();
         currentTopDialogue = null;
     }
     public string TextParser(DialogueAsset dialogue, int currentIndex)

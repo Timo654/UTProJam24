@@ -40,3 +40,13 @@ public enum CurrentPlayer
     Past,
     Present
 }
+
+public enum TutorialPhase
+{
+    Start,
+    PresentFirst,
+    PastFirst,
+    PastSecond,
+    PresentSecond,
+    End
+}

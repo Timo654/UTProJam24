@@ -1698,6 +1698,16 @@ MonoBehaviour:
   endings:
   - {fileID: 11400000, guid: 74f9a577a2d4a1a4ebdc5ba3155f8227, type: 2}
   - {fileID: 11400000, guid: 8153a7fd1938f6d44bac7e31990fec83, type: 2}
+  tutorialTextBottom:
+  - {fileID: 11400000, guid: 065fddd8c980f5541b15bd7da10eb189, type: 2}
+  - {fileID: 11400000, guid: ed4ec81821034f84db932ea551fb6104, type: 2}
+  - {fileID: 11400000, guid: 54a1101d0f7674749ad742f0f2cdb0e4, type: 2}
+  - {fileID: 11400000, guid: 430db02b34cf6ae4094d339f02495621, type: 2}
+  tutorialTextTop:
+  - {fileID: 11400000, guid: b6208f4776957834a94468fc863c2c36, type: 2}
+  - {fileID: 11400000, guid: 330107347807e82449d72267ff131f6d, type: 2}
+  - {fileID: 11400000, guid: cd80ac057a7eefb47b8fafc563404aaa, type: 2}
+  dialogueManager: {fileID: 1912087712}
 --- !u!114 &629801011
 MonoBehaviour:
   m_ObjectHideFlags: 0

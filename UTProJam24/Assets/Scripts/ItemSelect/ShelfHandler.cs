@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class ShelfHandler : MonoBehaviour
 {
     public static Action<List<ItemData>> OnOpenShelf;
+    public static Action OnCloseShelf;
     [SerializeField] private List<ItemData> items;
     TextMeshPro hintText;
     PlayerControls playerControls;
@@ -45,6 +46,7 @@ public class ShelfHandler : MonoBehaviour
     private void CloseUI()
     {
         shelfOpen = false;
+        OnCloseShelf?.Invoke();
     }
     private void OnDisable()
     {
