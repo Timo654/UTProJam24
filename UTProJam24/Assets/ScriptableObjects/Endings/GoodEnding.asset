@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoodEnding
   m_EditorClassIdentifier: 
   endingType: 1
-  endingSprite: {fileID: 21300000, guid: 749e2f97bfacbd34283f892182acf1b7, type: 3}
+  endingSprite: {fileID: 21300000, guid: 234f09cb9b2dffa498d66f8e32ff9f51, type: 3}
   endingMusic:
     Guid:
       Data1: 0
@@ -21,4 +21,5 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  endingText: you are winner :)
+  endingText: congratulations!
+  endingSprite2: {fileID: 21300000, guid: 46beb5a40d204ab4795d0d1723b65cad, type: 3}

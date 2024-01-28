@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BadEnding
   m_EditorClassIdentifier: 
   endingType: 0
-  endingSprite: {fileID: 21300000, guid: c01c1dc68d227334ab17e53f642fc5d7, type: 3}
+  endingSprite: {fileID: 21300000, guid: 6c681662bc2f6f14198049a5a1c238a5, type: 3}
   endingMusic:
     Guid:
       Data1: 0
@@ -22,3 +22,4 @@ MonoBehaviour:
       Data4: 0
     Path: 
   endingText: factory went boom...
+  endingSprite2: {fileID: 0}

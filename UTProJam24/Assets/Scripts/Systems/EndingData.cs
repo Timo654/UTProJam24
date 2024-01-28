@@ -10,4 +10,5 @@ public class EndingData : ScriptableObject
     public Sprite endingSprite;
     public EventReference endingMusic;
     public string endingText;
+    public Sprite endingSprite2;
 }
