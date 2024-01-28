@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System;
 using TMPro;
 using Unity.Mathematics;
@@ -25,6 +26,8 @@ public class FixableObject : MonoBehaviour
     InputAction openAction;
     private float initialHP;
     private bool started = false;
+    private EventInstance burningSound;
+    private EventInstance fixSound;
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
@@ -144,15 +147,23 @@ public class FixableObject : MonoBehaviour
     private void HandleStart()
     {
         // TODO - add fmod audio init stuff here
+        // fireSound = AudioManager._instance.CreateInstance(FMODEvents.instance.FireSound);
+        // leakSound = AudioManager._instance.CreateInstance(FMODEvents.instance.LeakSound);
+        // fireExtSound = AudioManager._instance.CreateInstance(FMODEvents.instance.FireExting);
         switch (obstacleType)
         {
             case ObstacleType.Fire:
+                burningSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.FireSound);
+                fixSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.FireExting);
                 // will start burning at some point. burning slowly fills the facility "broken" meter
                 break;
             case ObstacleType.WaterLeak:
+                burningSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.LeakSound);
+                fixSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.FixWrench);
                 // will start leaking at some point. leaking slowly fills the facility "broken" meter
                 break;
             case ObstacleType.AirPressure:
+                // TODO - air pressure
                 nextActivationAttempt = Time.time + 20f; // don't start it right away
                 arrowTransform = transform.GetChild(1);
                 MapArrowToValue(itemHealth);
@@ -227,7 +238,12 @@ public class FixableObject : MonoBehaviour
             hintText.enabled = true;
             interactable = true;
         }
-        if (obstacleType != ObstacleType.AirPressure) animator.SetBool("Active", true);
+            
+        if (obstacleType != ObstacleType.AirPressure)
+        {
+            burningSound.start();
+            animator.SetBool("Active", true);
+        }
     }
 
     void HandleTimelineSwitch(CurrentPlayer player)
@@ -250,7 +266,12 @@ public class FixableObject : MonoBehaviour
         currentlyActive = false;
         hintText.enabled = false;
         interactable = false;
-        if (obstacleType != ObstacleType.AirPressure) animator.SetBool("Active", false);
+        if (obstacleType != ObstacleType.AirPressure)
+        {
+            burningSound.stop(STOP_MODE.IMMEDIATE);
+            fixSound.start();
+            animator.SetBool("Active", false);
+        }
     }
 
     public bool IsCurrentlyActive()
