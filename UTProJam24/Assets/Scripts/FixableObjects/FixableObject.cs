@@ -1,16 +1,18 @@
 using System;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class FixableObject : MonoBehaviour
 {
     public static Action ConfirmItemUse;
+    public static Action<FixableObject> OnAirPressureLeak;
     public static Action<float> DamageFacility;
     public static Action IssueFixed;
     public Color arrowColour = Color.white; // arrow to point to the thing
     public float hitDamage = 1f;
-    public float itemHealth = 200f;
+    public float itemHealth = 60f; // hp is used for pressure gauge max value
     public ObstacleType obstacleType;
     private bool currentlyActive = false;
     private Animator animator;
@@ -18,14 +20,18 @@ public class FixableObject : MonoBehaviour
     private TextMeshPro hintText;
     private bool inTriggerArea = false;
     private bool currentlySelecting = false;
+    private float nextActivationAttempt;
+    private Transform arrowTransform;
     PlayerControls playerControls;
     InputAction openAction;
+    private float initialHP;
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
         playerControls = new PlayerControls();
         openAction = playerControls.Gameplay.OpenShelf;
         animator = GetComponent<Animator>();
+        initialHP = itemHealth;
     }
     private void Start()
     {
@@ -39,6 +45,8 @@ public class FixableObject : MonoBehaviour
                 // will start leaking at some point. leaking slowly fills the facility "broken" meter
                 break;
             case ObstacleType.AirPressure:
+                nextActivationAttempt = Time.time + 20f; // don't start it right away
+                arrowTransform = transform.GetChild(1);
                 // slowly decreases all the time. if it gets too low, the facility "broken" meter will fill fast
                 break;
             default:
@@ -66,9 +74,26 @@ public class FixableObject : MonoBehaviour
     {
         if (interactable)
         {
-            Debug.Log("interacting with object");
-            currentlySelecting = true;
-            ConfirmItemUse?.Invoke();
+            if (obstacleType == ObstacleType.AirPressure)
+            {
+                itemHealth += 10f;
+                if (itemHealth > initialHP)
+                {
+                    interactable = false;
+                    currentlyActive = false;
+                    itemHealth = initialHP;
+                    nextActivationAttempt = Time.time + 8f;
+                    hintText.enabled = false;
+                }
+                MapArrowToValue(itemHealth);
+            }
+            else
+            {
+                Debug.Log("interacting with object");
+                currentlySelecting = true;
+                ConfirmItemUse?.Invoke();
+            }
+            
         }
     }
 
@@ -120,7 +145,13 @@ public class FixableObject : MonoBehaviour
                 Debug.LogWarning($"Unknown obstacle {obstacleType}");
                 break;
         }
+    }
 
+    void MapArrowToValue(float mapValue)
+    {
+        // range: 180 to 0
+        // values: 0 to 60
+        arrowTransform.rotation = Quaternion.AngleAxis(math.remap(0, initialHP, 180f, 0, mapValue), Vector3.forward);
     }
     private void Update()
     {
@@ -143,11 +174,31 @@ public class FixableObject : MonoBehaviour
             case ObstacleType.AirPressure:
                 if (currentlyActive)
                 {
-                    // go down instead of damaging right away
+                    Debug.Log("do be active");
+                    if (itemHealth > 0f)
+                    {
+                        // go down instead of damaging right away
+                        itemHealth -= 1f * Time.deltaTime;
+                    }
+                    else
+                    {
+                        DamageFacility.Invoke(500f * Time.deltaTime);
+                    }
+                    MapArrowToValue(itemHealth);
                 }
                 else
                 {
                     // decide when to activate randomly
+                    if (Time.time > nextActivationAttempt)
+                    {
+                        bool activate = UnityEngine.Random.value > 0.5f;
+                        if (activate)
+                        {
+                            currentlyActive = true;
+                            OnAirPressureLeak?.Invoke(this);
+                        }
+                        else nextActivationAttempt = Time.time + 5f; // delay the inevitable doom
+                    }      
                 }
                 // slowly starts decreasing at some point. starts by itself eventually
                 break;
@@ -165,7 +216,7 @@ public class FixableObject : MonoBehaviour
             hintText.enabled = true;
             interactable = true;
         }
-        animator.SetBool("Active", true);
+        if (obstacleType != ObstacleType.AirPressure) animator.SetBool("Active", true);
     }
 
     void HandleTimelineSwitch(CurrentPlayer player)
@@ -189,7 +240,7 @@ public class FixableObject : MonoBehaviour
         hintText.enabled = false;
         interactable = false;
         IssueFixed?.Invoke();
-        animator.SetBool("Active", false);
+        if (obstacleType != ObstacleType.AirPressure) animator.SetBool("Active", false);
     }
 
     public bool IsCurrentlyActive()

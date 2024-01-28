@@ -15,7 +15,6 @@ public class FacilityHandler : MonoBehaviour
     [SerializeField] FixableObject[] fixableObjects;
     [SerializeField] GameObject directionArrowPrefab;
     [SerializeField] Transform futurePlayer;
-    private List<FixableObject> burningObjects = new(); // use to guide arrow?
     private float nextCheckTime;
     void Start()
     {
@@ -38,7 +37,6 @@ public class FacilityHandler : MonoBehaviour
             if (!obj.IsCurrentlyActive())
             {
                 obj.ActivateObstacle();
-                burningObjects.Add(obj);
                 var arrow = Instantiate(directionArrowPrefab, futurePlayer.position, futurePlayer.rotation, futurePlayer);
                 var arrowScript = arrow.GetComponent<TargetArrow>();
                 arrowScript.Setup(obj);
@@ -46,35 +44,27 @@ public class FacilityHandler : MonoBehaviour
         }
     }
 
+    private void InitializeArrow(FixableObject fixableObject)
+    {
+        fixableObject.ActivateObstacle();
+        var arrow = Instantiate(directionArrowPrefab, futurePlayer.position, futurePlayer.rotation, futurePlayer);
+        var arrowScript = arrow.GetComponent<TargetArrow>();
+        arrowScript.Setup(fixableObject);
+    }
     private void OnEnable()
     {
         FixableObject.DamageFacility += DecreaseFacilityHealth;
-        FixableObject.IssueFixed += RemoveFixedObjects;
+        FixableObject.OnAirPressureLeak += InitializeArrow;
         Timer.OnZero += FacilitySaved;
     }
 
     private void OnDisable()
     {
         FixableObject.DamageFacility -= DecreaseFacilityHealth;
-        FixableObject.IssueFixed -= RemoveFixedObjects;
+        FixableObject.OnAirPressureLeak -= InitializeArrow;
         Timer.OnZero -= FacilitySaved;
     }
 
-    private void RemoveFixedObjects()
-    {
-        List<FixableObject> removeList = new();
-        foreach (var item in burningObjects)
-        {
-            if (!item.IsCurrentlyActive())
-            {
-                removeList.Add(item);
-            }
-        }
-        foreach (var item in removeList)
-        {
-            burningObjects.Remove(item);
-        }
-    }
     private void FacilitySaved()
     {
         OnFacilitySaved?.Invoke(EndingType.GoodEnding);
