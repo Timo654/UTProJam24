@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - Press C to go back to the present.
-  isInputRelated: 0
-  dialogueMobile: []
-  dialogueXBOX: []
-  dialoguePS: []
+  isInputRelated: 1
+  dialogueMobile:
+  - Press SWITCH to go back to the present.
+  dialogueXBOX:
+  - Press Y to go back to the present.
+  dialoguePS:
+  - Press Triangle to go back to the present.
   dialogueTilt: []

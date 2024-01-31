@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class ConfirmItemUsage : MonoBehaviour
 {
+    public static Action OpenUI;
+    public static Action CloseUI;
     [SerializeField] private InventorySystem inventory;
     [SerializeField] private Transform itemList;
     [SerializeField] GameObject itemPrefab;
@@ -31,6 +34,7 @@ public class ConfirmItemUsage : MonoBehaviour
             buttonScript.SetupItem(item, true, true);
         }
         itemList.parent.gameObject.SetActive(true);
+        OpenUI?.Invoke();
     }
 
     public void CloseBox(ItemData _)
@@ -42,5 +46,6 @@ public class ConfirmItemUsage : MonoBehaviour
         {
             Destroy(itemList.GetChild(i).gameObject);
         }
+        CloseUI?.Invoke();
     }
 }

@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Phase3
   m_EditorClassIdentifier: 
   dialogue:
-  - "Ohhhh, I remember now. \nOkay, I need to focus.. What was I doing?"
+  - 'Ohhhh, I remember now. '
+  - If these are the items I chose, I'll have to make it work somehow. It's not like
+    I can go back in time to put them back in the shelf.
+  - Okay, let's focus on the task at hand...
   - Right - my first shift at the nuclear facility. I've been waiting for this for
     ages!
   - I guess I have to "C" how the present is doing.

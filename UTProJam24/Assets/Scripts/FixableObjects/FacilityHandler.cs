@@ -24,7 +24,7 @@ public class FacilityHandler : MonoBehaviour
     {
         SetInitialFacilityHP?.Invoke(facilityHealth);
         timer.StartTimer(gameLength);
-        nextCheckTime = Time.time + 10f; // add 5 seconds of safe time MIGHT NEED TO REWORK WE KINDA NEED A TUTORIAL OR STH
+        nextCheckTime = Time.time + 5f; // add 5 seconds of safe time MIGHT NEED TO REWORK WE KINDA NEED A TUTORIAL OR STH
         started = true;
     }
     // Update is called once per frame

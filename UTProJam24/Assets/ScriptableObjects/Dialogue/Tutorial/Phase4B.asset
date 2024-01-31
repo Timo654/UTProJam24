@@ -10,23 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4da734fbfd735f42ab70ff2c556821c, type: 3}
-  m_Name: Phase2Top
+  m_Name: Phase4B
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Walk up to a shelf and press E.
-
-    Use WASD to move.'
-  isInputRelated: 1
-  dialogueMobile:
-  - 'Walk up to a shelf and press OPEN.
-
-    Use Move Stick to move.'
-  dialogueXBOX:
-  - 'Walk up to a shelf and press B.
-
-    Use the Left Stick to move.'
-  dialoguePS:
-  - 'Walk up to a shelf and press Circle.
-
-    Use the Left Stick to move.'
+  - All right. Time to get to work. The factory won't fix itself.
+  isInputRelated: 0
+  dialogueMobile: []
+  dialogueXBOX: []
+  dialoguePS: []
   dialogueTilt: []

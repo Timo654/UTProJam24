@@ -1,5 +1,4 @@
 using FMOD.Studio;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class Player_Walk : MonoBehaviour
@@ -36,16 +35,17 @@ public class Player_Walk : MonoBehaviour
     //public ParticleSystem dust;
     // Audio
     public EventInstance playerFootsteps;
-    public bool isFuture = false;
+    public CurrentPlayer player = CurrentPlayer.Present;
     private void Start()
     {
-        if (isFuture)
+        switch (player)
         {
-            playerFootsteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.StepsFuture);
-        }
-        else
-        {
-            playerFootsteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.StepsPast);
+            case CurrentPlayer.Present:
+                playerFootsteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.StepsFuture);
+                break;
+            case CurrentPlayer.Past:
+                playerFootsteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.StepsPast);
+                break;
         }
     }
 
@@ -95,7 +95,6 @@ public class Player_Walk : MonoBehaviour
         }
         else
         {
-
             directionX = 0;
         }
     }

@@ -14,7 +14,6 @@ public class PlayerHandler : MonoBehaviour
     {
         for (int i=0; i<playerWalk.Length; i++)
         {
-            if (i == playerIndex) continue;
             playerWalk[i].enabled = false;
             playerJump[i].enabled = false;
         }
@@ -24,14 +23,21 @@ public class PlayerHandler : MonoBehaviour
     {
         CameraSwitcher.OnStartCameraSwitch += HandleStartSwitch;
         CameraSwitcher.OnCameraSwitched += HandleSwitch;
+        GameManager.AllowMovement += SetMovement;
     }
 
     private void OnDisable()
     {
         CameraSwitcher.OnStartCameraSwitch -= HandleStartSwitch;
         CameraSwitcher.OnCameraSwitched -= HandleSwitch;
+        GameManager.AllowMovement -= SetMovement;
     }
 
+    private void SetMovement(bool enabled)
+    {
+        playerWalk[playerIndex].enabled = enabled;
+        playerJump[playerIndex].enabled = enabled;
+    }
     private void HandleStartSwitch()
     {
         playerWalk[playerIndex].enabled = false;

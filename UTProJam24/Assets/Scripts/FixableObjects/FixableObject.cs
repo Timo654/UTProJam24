@@ -33,7 +33,7 @@ public class FixableObject : MonoBehaviour
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
         playerControls = new PlayerControls();
-        openAction = playerControls.Gameplay.OpenShelf;
+        openAction = playerControls.Gameplay.Interact;
         animator = GetComponent<Animator>();
         initialHP = itemHealth;
     }
@@ -209,7 +209,7 @@ public class FixableObject : MonoBehaviour
                     if (itemHealth > 0f)
                     {
                         // go down instead of damaging right away
-                        itemHealth -= 1f * Time.deltaTime;
+                        itemHealth -= 2f * Time.deltaTime;
                     }
                     else
                     {
@@ -228,7 +228,7 @@ public class FixableObject : MonoBehaviour
                             currentlyActive = true;
                             OnAirPressureLeak?.Invoke(this);
                         }
-                        else nextActivationAttempt = Time.time + 5f; // delay the inevitable doom
+                        else nextActivationAttempt = Time.time + 3f; // delay the inevitable doom
                     }      
                 }
                 // slowly starts decreasing at some point. starts by itself eventually

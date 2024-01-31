@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - Press C to remember the past.
-  isInputRelated: 0
-  dialogueMobile: []
-  dialogueXBOX: []
-  dialoguePS: []
+  isInputRelated: 1
+  dialogueMobile:
+  - Press SWITCH to remember the past.
+  dialogueXBOX:
+  - Press Y to remember the past.
+  dialoguePS:
+  - Press Triangle to remember the past.
   dialogueTilt: []

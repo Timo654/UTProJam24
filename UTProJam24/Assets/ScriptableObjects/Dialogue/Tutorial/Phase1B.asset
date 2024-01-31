@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Phase1B
   m_EditorClassIdentifier: 
   dialogue:
-  - Why did this have to happen today, of all days... Feels like deja-vu, though.
-  - I can't remember if I brought the right things for the job.. I need to think
-    back to what I brought with me.
+  - This feels like deja-vu...
+  - I've just been in this place before...
+  - Should I double check what I have to do today?
   isInputRelated: 0
   dialogueMobile: []
   dialogueXBOX: []

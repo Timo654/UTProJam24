@@ -15,10 +15,26 @@ MonoBehaviour:
   dialogue:
   - Huh... It almost feels as if I *did* go back into the past.
   - Anyways, let's see - what did I bring with me today?
+  - "I should go check out one of these shelves. \nThe manual says.... move with
+    WASD.. or arrows.. What's that...?"
+  isInputRelated: 1
+  dialogueMobile:
+  - Huh... It almost feels as if I *did* go back into the past.
+  - Anyways, let's see - what did I bring with me today?
+  - "I should go check out one of these shelves. \nThe manual says.... move the Move
+    Stick.. What's that...?"
+  dialogueXBOX:
+  - Huh... It almost feels as if I *did* go back into the past.
+  - Anyways, let's see - what did I bring with me today?
+  - "I should go check out one of these shelves. \nThe manual says.... move with
+    the Left Stick.. What's that...?"
+  dialoguePS:
+  - Huh... It almost feels as if I *did* go back into the past.
+  - Anyways, let's see - what did I bring with me today?
+  - "I should go check out one of these shelves. \nThe manual says.... move with
+    the Left Stick.. What's that...?"
+  dialogueTilt:
+  - Huh... It almost feels as if I *did* go back into the past.
+  - Anyways, let's see - what did I bring with me today?
   - "I should go check out one of these shelves. \nThe manual says.... move WASD..
     or arrows.. What's that...?"
-  isInputRelated: 0
-  dialogueMobile: []
-  dialogueXBOX: []
-  dialoguePS: []
-  dialogueTilt: []

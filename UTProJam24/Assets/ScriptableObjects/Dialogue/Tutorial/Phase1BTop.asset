@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4da734fbfd735f42ab70ff2c556821c, type: 3}
-  m_Name: Phase2Top
+  m_Name: Phase1BTop
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Walk up to a shelf and press E.
+  - 'Press SPACE to skip the tutorial.
 
-    Use WASD to move.'
+    Press C to continue the tutorial.'
   isInputRelated: 1
   dialogueMobile:
-  - 'Walk up to a shelf and press OPEN.
+  - 'Press JUMP to skip the tutorial.
 
-    Use Move Stick to move.'
+    Press SWITCH to continue the tutorial.'
   dialogueXBOX:
-  - 'Walk up to a shelf and press B.
+  - 'Press A to skip the tutorial.
 
-    Use the Left Stick to move.'
+    Press Y to continue the tutorial.'
   dialoguePS:
-  - 'Walk up to a shelf and press Circle.
+  - 'Press Cross to skip the tutorial.
 
-    Use the Left Stick to move.'
+    Press Triangle to continue the tutorial.'
   dialogueTilt: []

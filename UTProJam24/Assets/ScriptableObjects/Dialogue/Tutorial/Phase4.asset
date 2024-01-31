@@ -19,8 +19,26 @@ MonoBehaviour:
   - 'I just have to go around and ensure that nothing breaks. '
   - "In case something breaks, I think I had to locate the object and press \"E\"..?
     \nNot sure what they meant by that, but I'm sure YOU can figure it out."
-  isInputRelated: 0
-  dialogueMobile: []
-  dialogueXBOX: []
-  dialoguePS: []
+  isInputRelated: 1
+  dialogueMobile:
+  - I'm so glad I passed the job interview... I wonder why there's nobody else here
+    though...
+  - Right. I can't let that weird dream distract me. Let's get to work!
+  - 'I just have to go around and ensure that nothing breaks. '
+  - "In case something breaks, I think I had to locate the object and press \"FIX\"..?
+    \nNot sure what they meant by that, but I'm sure YOU can figure it out."
+  dialogueXBOX:
+  - I'm so glad I passed the job interview... I wonder why there's nobody else here
+    though...
+  - Right. I can't let that weird dream distract me. Let's get to work!
+  - 'I just have to go around and ensure that nothing breaks. '
+  - "In case something breaks, I think I had to locate the object and press \"Y\"..?
+    \nNot sure what they meant by that, but I'm sure YOU can figure it out."
+  dialoguePS:
+  - I'm so glad I passed the job interview... I wonder why there's nobody else here
+    though...
+  - Right. I can't let that weird dream distract me. Let's get to work!
+  - 'I just have to go around and ensure that nothing breaks. '
+  - "In case something breaks, I think I had to locate the object and press \"Triangle\"..?
+    \nNot sure what they meant by that, but I'm sure YOU can figure it out."
   dialogueTilt: []

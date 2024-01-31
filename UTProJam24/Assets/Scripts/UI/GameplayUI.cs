@@ -33,7 +33,7 @@ public class GameplayUI : MonoBehaviour
         facilityHealth = hp;
         initialFacilityHP = hp;
         visualFacilityHealth = hp;
-        facilityHPText.text = $"Facility Health: {Mathf.RoundToInt(visualFacilityHealth)}/{initialFacilityHP}";
+        facilityHPText.text = $"Facility health: {Mathf.RoundToInt(visualFacilityHealth)}/{initialFacilityHP}";
     }
 
     private void Update()
@@ -41,7 +41,7 @@ public class GameplayUI : MonoBehaviour
         if (facilityHealth != visualFacilityHealth)
         {
             visualFacilityHealth = Mathf.MoveTowards(visualFacilityHealth, facilityHealth, hpCounterSpeed * Time.deltaTime);
-            facilityHPText.text = $"Facility Health: {Mathf.RoundToInt(visualFacilityHealth)}/{initialFacilityHP}";
+            facilityHPText.text = $"Facility health: {Mathf.RoundToInt(visualFacilityHealth)}/{initialFacilityHP}";
         }
     }
     void UpdateTimerText(string time)

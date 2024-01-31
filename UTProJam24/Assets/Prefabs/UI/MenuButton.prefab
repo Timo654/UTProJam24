@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6799065705922096150}
   - component: {fileID: 3939566841923971109}
   - component: {fileID: 9140007767263754377}
+  - component: {fileID: 7789045076681939360}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -172,6 +173,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableSelectAudio: 0
+--- !u!114 &7789045076681939360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799065705922096144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e85607ad3640e64782ca53b1da35714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedColor: {r: 0.18039216, g: 0.10980393, b: 0.023529414, a: 1}
+  unselectedColor: {r: 0.46666667, g: 0.31764707, b: 0.17254902, a: 1}
 --- !u!1 &6799065706184972082
 GameObject:
   m_ObjectHideFlags: 0

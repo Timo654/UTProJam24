@@ -16,7 +16,7 @@ public class PickuppableObject : MonoBehaviour
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
         playerControls = new PlayerControls();
-        openAction = playerControls.Gameplay.OpenShelf;
+        openAction = playerControls.Gameplay.Interact;
     }
 
     private void OnEnable()
