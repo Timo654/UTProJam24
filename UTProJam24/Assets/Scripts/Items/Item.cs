@@ -18,7 +18,14 @@ public class Item : MonoBehaviour
         itemText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         itemData = data;
         image.sprite = data.sprite;
-        itemText.text = data.displayName;
+        if (isInteractable && !isConfirmUI ) // disable text in item select cause its too long usually
+        {
+            itemText.text = "";
+        }
+        else
+        {
+            itemText.text = data.displayName;
+        }
         confirmUI = isConfirmUI;
         GetComponent<Button>().interactable = isInteractable;
     }

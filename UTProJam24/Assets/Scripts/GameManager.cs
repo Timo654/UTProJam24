@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour
 
     private void HandlePhase2SwitchFlag()
     {
+        if (!phase2bFlag) return;
         switch (currentTutorialPhase)
         {
             case TutorialPhase.PastFirst:

@@ -108,7 +108,8 @@ public class InputHandler : MonoBehaviour
 
     private void SetCanInteract(bool state)
     {
-        timelineSwitchEnabled = state;
+        canInteract = state;
+        Debug.Log($"interact {state}");
     }
 
     private void OnCloseMenu()
@@ -123,7 +124,7 @@ public class InputHandler : MonoBehaviour
 
     private void InteractPerformed(InputAction.CallbackContext context)
     {
-        if (uiOpen || tutorialOpen || isMidTransition || isPaused || canInteract) return;
+        if (uiOpen || tutorialOpen || isMidTransition || isPaused || !canInteract) return;
         interact?.Invoke(currentPlayer);
     }
 

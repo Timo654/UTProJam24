@@ -4656,7 +4656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f536393ec660144b0a8dfa084fb361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  facilityHealth: 150
+  facilityHealth: 200
   timer: {fileID: 629801014}
   gameLength: 80
   accidentDelay: 2
@@ -5889,7 +5889,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Facility health: 150/150'
+  m_text: 'Facility health: 200/200'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c53ca3b00f759f34280e33eefd89d34f, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: b550aecc584f3c24e89c5716940c46cc, type: 2}
@@ -8705,7 +8705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4295145534061455129, guid: 17baa5b8b98b6534f82eca9281f7ae5d, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4295145534061455129, guid: 17baa5b8b98b6534f82eca9281f7ae5d, type: 3}
       propertyPath: m_hasFontAssetChanged

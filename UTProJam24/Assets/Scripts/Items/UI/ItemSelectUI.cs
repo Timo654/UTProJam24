@@ -27,8 +27,9 @@ public class ItemSelectUI : MonoBehaviour
         ShelfHandler.OnOpenShelf -= OpenBox;
         Item.ItemDestroyed -= UpdateCurrentSelection;
     }
-    void SubscribeToNaviEvents()
+    IEnumerator SubscribeToNaviEvents()
     {
+        yield return null; // waits a frame so we dont instantly close the thing
         InputHandler.back += CloseBox;
     }
 
@@ -59,7 +60,7 @@ public class ItemSelectUI : MonoBehaviour
     public void OpenBox(List<ItemData> items)
     {
         if (itemList.parent.gameObject.activeSelf) return;
-        SubscribeToNaviEvents();
+        StartCoroutine(SubscribeToNaviEvents());
         OnOpenItemSelect?.Invoke();
         UpdateItems(items);
         UpdateCurrentSelection();

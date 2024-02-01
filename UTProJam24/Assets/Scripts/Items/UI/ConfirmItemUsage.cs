@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -28,8 +29,9 @@ public class ConfirmItemUsage : MonoBehaviour
         Item.ItemUseConfirm -= CloseBox;
     }
 
-    void SubscribeToNaviEvents()
+    IEnumerator SubscribeToNaviEvents()
     {
+        yield return null; // waits a frame so we dont instantly close the thing
         InputHandler.back += CloseBox;
     }
 
@@ -40,7 +42,7 @@ public class ConfirmItemUsage : MonoBehaviour
     public void OnShowConfirmation()
     {
         if (itemList.parent.gameObject.activeSelf) return;
-        SubscribeToNaviEvents();
+        StartCoroutine(SubscribeToNaviEvents());
         foreach (var item in inventory.items)
         {
             var button = Instantiate(itemPrefab, itemList.position, itemList.rotation, itemList);
