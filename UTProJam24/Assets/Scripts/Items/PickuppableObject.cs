@@ -1,60 +1,36 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PickuppableObject : MonoBehaviour
 {
     public static Action<ItemData> PickUpItem;
     [SerializeField] private ItemData itemData;
     TextMeshPro hintText;
-    PlayerControls playerControls;
-    InputAction openAction;
     private bool pickupStarted = false;
     private bool interactable = false;
     private void Awake()
     {
-        hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
-        playerControls = new PlayerControls();
-        openAction = playerControls.Gameplay.Interact;
+        hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide 
     }
 
     private void OnEnable()
     {
         InventorySystem.ItemAdded += RemoveItem;
-        PlayerHandler.OnTimelineSwitch += HandleTimelineSwitch;
-        openAction.Enable();
-        openAction.performed += ShelfOpen;
+        InputHandler.interact += ShelfOpen;
     }
 
     private void OnDisable()
     {
         InventorySystem.ItemAdded -= RemoveItem;
-        PlayerHandler.OnTimelineSwitch -= HandleTimelineSwitch;
-        openAction.Disable();
-        openAction.performed -= ShelfOpen;
+        InputHandler.interact -= ShelfOpen;
     }
 
-    void HandleTimelineSwitch(CurrentPlayer player)
+    public void ShelfOpen(CurrentPlayer player)
     {
-        switch (player)
-        {
-            case CurrentPlayer.Past:
-                openAction.Enable();
-                break;
-            case CurrentPlayer.Present:
-                openAction.Disable();
-                break;
-        }
-    }
-
-    public void ShelfOpen(InputAction.CallbackContext context)
-    {
-        if (interactable)
-        {
-            pickupStarted = true;
-            PickUpItem?.Invoke(itemData);
-        }
+        if (player != CurrentPlayer.Past || !interactable) return;
+        pickupStarted = true;
+        PickUpItem?.Invoke(itemData);
     }
 
     private void RemoveItem(ItemData item)

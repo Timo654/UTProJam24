@@ -3,7 +3,6 @@ using System;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class FixableObject : MonoBehaviour
 {
@@ -22,8 +21,6 @@ public class FixableObject : MonoBehaviour
     private bool currentlySelecting = false;
     private float nextActivationAttempt;
     private Transform arrowTransform;
-    PlayerControls playerControls;
-    InputAction openAction;
     private float initialHP;
     private bool started = false;
     private EventInstance burningSound;
@@ -32,54 +29,45 @@ public class FixableObject : MonoBehaviour
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
-        playerControls = new PlayerControls();
-        openAction = playerControls.Gameplay.Interact;
         animator = GetComponent<Animator>();
         initialHP = itemHealth;
     }
     private void OnEnable()
     {
-        openAction.Enable();
-        openAction.performed += FixObject;
-        PlayerHandler.OnTimelineSwitch += HandleTimelineSwitch;
+        InputHandler.interact += FixObject;
         Item.ItemUseConfirm += HandleItemSelect;
         GameManager.StartGame += HandleStart;
     }
 
     private void OnDisable()
     {
-        openAction.Disable();
-        openAction.performed -= FixObject;
-        PlayerHandler.OnTimelineSwitch -= HandleTimelineSwitch;
+        InputHandler.interact -= FixObject;
         GameManager.StartGame -= HandleStart;
         Item.ItemUseConfirm -= HandleItemSelect;
     }
 
-    public void FixObject(InputAction.CallbackContext context)
+    public void FixObject(CurrentPlayer player)
     {
-        if (interactable)
+        if (player != CurrentPlayer.Past || !interactable) return;
+        if (obstacleType == ObstacleType.AirPressure)
         {
-            if (obstacleType == ObstacleType.AirPressure)
+            itemHealth += 10f;
+            fixSound.start();
+            if (itemHealth > initialHP)
             {
-                itemHealth += 10f;
-                fixSound.start();
-                if (itemHealth > initialHP)
-                {
-                    interactable = false;
-                    currentlyActive = false;
-                    itemHealth = initialHP;
-                    nextActivationAttempt = Time.time + 8f;
-                    hintText.enabled = false;
-                }
-                MapArrowToValue(itemHealth);
+                interactable = false;
+                currentlyActive = false;
+                itemHealth = initialHP;
+                nextActivationAttempt = Time.time + 8f;
+                hintText.enabled = false;
             }
-            else
-            {
-                Debug.Log("interacting with object");
-                currentlySelecting = true;
-                ConfirmItemUse?.Invoke();
-            }
-            
+            MapArrowToValue(itemHealth);
+        }
+        else
+        {
+            Debug.Log("interacting with object");
+            currentlySelecting = true;
+            ConfirmItemUse?.Invoke();
         }
     }
 
@@ -152,10 +140,6 @@ public class FixableObject : MonoBehaviour
     private void HandleStart()
     {
         ethanolBreak = AudioManager.Instance.CreateInstance(FMODEvents.Instance.GlassBreak);
-        // TODO - add fmod audio init stuff here
-        // fireSound = AudioManager._instance.CreateInstance(FMODEvents.instance.FireSound);
-        // leakSound = AudioManager._instance.CreateInstance(FMODEvents.instance.LeakSound);
-        // fireExtSound = AudioManager._instance.CreateInstance(FMODEvents.instance.FireExting);
         switch (obstacleType)
         {
             case ObstacleType.Fire:
@@ -229,7 +213,7 @@ public class FixableObject : MonoBehaviour
                             OnAirPressureLeak?.Invoke(this);
                         }
                         else nextActivationAttempt = Time.time + 3f; // delay the inevitable doom
-                    }      
+                    }
                 }
                 // slowly starts decreasing at some point. starts by itself eventually
                 break;
@@ -247,24 +231,11 @@ public class FixableObject : MonoBehaviour
             hintText.enabled = true;
             interactable = true;
         }
-            
+
         if (obstacleType != ObstacleType.AirPressure)
         {
             burningSound.start();
             animator.SetBool("Active", true);
-        }
-    }
-
-    void HandleTimelineSwitch(CurrentPlayer player)
-    {
-        switch (player)
-        {
-            case CurrentPlayer.Past:
-                openAction.Disable();
-                break;
-            case CurrentPlayer.Present:
-                openAction.Enable();
-                break;
         }
     }
 

@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour
     private float phaseStart;
     private float tutorialTimer;
     private bool returningPlayer = false;
-    private bool phase1BFlag = false;
-    private bool phase1Flag = false;
-    private bool phase2Flag = false;
-    private bool phase3Flag = false;
+    private bool phase1BFlag = false; // did a sick flip to skip the tutorial
+    private bool phase1Flag = false; // switched timelines
+    private bool phase2Flag = false; // closed shelf
+    private bool phase2bFlag = false; // picked item from shelf
+    private bool phase2cFlag = false; // inventory full
+    private bool phase3Flag = false; // went back to present
+    private int pickupCounter;
     [SerializeField] private DialogueAsset[] tutorialTextBottom; // file for each phase
     [SerializeField] private DialogueAsset[] tutorialTextTop; // file for each phase
     [SerializeField] private DialogueManager dialogueManager;
@@ -49,10 +52,12 @@ public class GameManager : MonoBehaviour
         DialogueManager.OnBottomDialogueStateChanged += HandleBottomDialogueToggle;
         DialogueManager.OnTopDialogueStateChanged += HandleTopDialogueToggle;
         PlayerHandler.OnTimelineSwitch += SetFlags;
-        ItemSelectUI.OnOpenItemSelect += DisableMovement;
+        ItemSelectUI.OnOpenItemSelect += DisableMovement; // TODO - move to inputhandler?
         ItemSelectUI.OnCloseItemSelect += EnableMovement;
         ConfirmItemUsage.OpenUI += DisableMovement;
         ConfirmItemUsage.CloseUI += EnableMovement;
+        InventorySystem.ItemAdded += HandlePhase2bFlag;
+        PickuppableObject.PickUpItem += HandlePhase2cFlag;
         if (returningPlayer)
         {
             AllowMovement += EnableJumpCheck;
@@ -60,6 +65,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void HandlePhase2bFlag(ItemData data)
+    {
+        phase2bFlag = true;
+        phaseStart = tutorialTimer;
+    }
+
+    private void HandlePhase2cFlag(ItemData _)
+    {
+        pickupCounter += 1;
+        if (pickupCounter >= 2)
+        {
+            phase2cFlag = true;
+            phaseStart = tutorialTimer;
+        }   
+    }
     private void OnDisable()
     {
         LevelChanger.OnFadeInFinished -= HandleStart;
@@ -73,6 +93,8 @@ public class GameManager : MonoBehaviour
         ItemSelectUI.OnCloseItemSelect -= EnableMovement;
         ConfirmItemUsage.OpenUI -= DisableMovement;
         ConfirmItemUsage.CloseUI -= EnableMovement;
+        InventorySystem.ItemAdded -= HandlePhase2bFlag;
+        PickuppableObject.PickUpItem -= HandlePhase2cFlag;
         if (returningPlayer)
         {
             AllowMovement -= EnableJumpCheck;
@@ -219,7 +241,25 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case TutorialPhase.PastFirst:
-                if (phase2Flag && (tutorialTimer > phaseStart + 1.5f))
+                if (phase2cFlag && (tutorialTimer > phaseStart + 1.5f))
+                {
+                    phaseStart = tutorialTimer;
+                    dialogueManager.ResetTopDialogue(); // end top dialogue
+
+                    dialogueManager.StartDialogue(tutorialTextBottom[6], DialogueManager.DialogueType.Bottom);
+
+                    if (!bottomDialogueActive)
+                    {
+                        phaseStart = tutorialTimer;
+                        currentTutorialPhase = TutorialPhase.End;
+                        if (!topDialogueActive)
+                        {
+                            dialogueManager.StartDialogue(tutorialTextTop[2], DialogueManager.DialogueType.Top);
+                            SetTimelineSwitch?.Invoke(true);
+                        }
+                    }
+                }
+                else if (phase2Flag && phase2bFlag && (tutorialTimer > phaseStart + 1.5f))
                 {
                     dialogueManager.ResetTopDialogue(); // end top dialogue
 
