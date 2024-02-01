@@ -14,7 +14,22 @@ public class ShelfHandler : MonoBehaviour
     private bool shelfOpen = false;
     private void Awake()
     {
-        hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
+        hintText = transform.GetChild(0).GetComponent<TextMeshPro>();
+        switch (Helper.GetControllerType())
+        {
+            case ControlType.Keyboard:
+                hintText.text = "Press E";
+                break;
+            case ControlType.Mobile:
+                hintText.text = "Press OPEN";
+                break;
+            case ControlType.XBOX:
+                hintText.text = "Press B";
+                break;
+            case ControlType.DualShock:
+                hintText.text = "Press Circle";
+                break;
+        }
         items.AddRange(GetComponentsInChildren<ShelfItem>());
         foreach (var item in items)
         {

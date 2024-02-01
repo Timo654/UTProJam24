@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static Action StartGame;
     public static Action<bool> AllowMovement;
+    public static Action<bool> AllowInteract;
     public static Action<bool> SetTimelineSwitch;
     private bool tutorialMode = true;
     [SerializeField] private EndingData[] endings;
@@ -191,6 +192,7 @@ public class GameManager : MonoBehaviour
         {
             case TutorialPhase.Start:
                 AllowMovement?.Invoke(false);
+                AllowInteract?.Invoke(false);
                 if (returningPlayer)
                 {
                     dialogueManager.StartDialogue(tutorialTextBottom[4], DialogueManager.DialogueType.Bottom);
@@ -220,6 +222,7 @@ public class GameManager : MonoBehaviour
                     {
                         currentTutorialPhase = TutorialPhase.PastFirst;
                         phaseStart = tutorialTimer;
+                        AllowInteract?.Invoke(true);
                         if (!topDialogueActive)
                         {
                             dialogueManager.StartDialogue(tutorialTextTop[1], DialogueManager.DialogueType.Top);
@@ -272,6 +275,7 @@ public class GameManager : MonoBehaviour
                     if (!bottomDialogueActive)
                     {
                         phaseStart = tutorialTimer;
+                        AllowInteract?.Invoke(false);
                         currentTutorialPhase = TutorialPhase.End;
                         if (!topDialogueActive)
                         {
@@ -289,6 +293,7 @@ public class GameManager : MonoBehaviour
                     if (tutorialTimer > phaseStart + 0.5f)
                     {
                         SetTimelineSwitch?.Invoke(true);
+                        AllowInteract?.Invoke(true);
                         tutorialMode = false;
                         StartGame?.Invoke();
                     }
@@ -299,6 +304,7 @@ public class GameManager : MonoBehaviour
                     dialogueManager.StartDialogue(tutorialTextBottom[3], DialogueManager.DialogueType.Bottom);
                     if (tutorialTimer > phaseStart + 3f)
                     {
+                        AllowInteract?.Invoke(true);
                         tutorialMode = false;
                         SaveManager.Instance.gameData.tutorialDone = true;
                         StartGame?.Invoke();

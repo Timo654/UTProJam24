@@ -16,6 +16,7 @@ public class InputHandler : MonoBehaviour
     private bool timelineSwitchEnabled = true;
     private bool isMidTransition = false;
     private bool isPaused = false;
+    private bool canInteract = false;
     private InputAction interactInput;
     private InputAction cameraAction;
     private InputAction pauseAction;
@@ -51,6 +52,7 @@ public class InputHandler : MonoBehaviour
         CameraSwitcher.OnCameraSwitched += EndTransition;
         PlayerHandler.OnTimelineSwitch += TogglePlayer;
         PauseMenuController.GamePaused += TogglePause;
+        GameManager.AllowInteract += SetCanInteract;
     }
     private void OnDisable()
     {
@@ -72,6 +74,7 @@ public class InputHandler : MonoBehaviour
         CameraSwitcher.OnCameraSwitched -= EndTransition;
         PlayerHandler.OnTimelineSwitch -= TogglePlayer;
         PauseMenuController.GamePaused -= TogglePause;
+        GameManager.AllowInteract -= SetCanInteract;
     }
 
     private void TogglePause(bool obj)
@@ -103,6 +106,11 @@ public class InputHandler : MonoBehaviour
         timelineSwitchEnabled = state;
     }
 
+    private void SetCanInteract(bool state)
+    {
+        timelineSwitchEnabled = state;
+    }
+
     private void OnCloseMenu()
     {
         uiOpen = false;
@@ -115,7 +123,7 @@ public class InputHandler : MonoBehaviour
 
     private void InteractPerformed(InputAction.CallbackContext context)
     {
-        if (uiOpen || tutorialOpen || isMidTransition || isPaused) return;
+        if (uiOpen || tutorialOpen || isMidTransition || isPaused || canInteract) return;
         interact?.Invoke(currentPlayer);
     }
 

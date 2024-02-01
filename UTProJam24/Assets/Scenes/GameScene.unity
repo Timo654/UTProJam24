@@ -2616,6 +2616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 2bda2fe9369604242a794e4633f7bf61, type: 2}
+  hideText: 0
 --- !u!61 &648080219
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8703,6 +8704,10 @@ PrefabInstance:
       value: Shelf
       objectReference: {fileID: 0}
     - target: {fileID: 4295145534061455129, guid: 17baa5b8b98b6534f82eca9281f7ae5d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295145534061455129, guid: 17baa5b8b98b6534f82eca9281f7ae5d, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -8828,6 +8833,10 @@ PrefabInstance:
     - target: {fileID: 1582203562136261811, guid: a64add1d77d8ed0429edf611048fdef5, type: 3}
       propertyPath: m_Name
       value: AirPressure
+      objectReference: {fileID: 0}
+    - target: {fileID: 2540655546646664846, guid: a64add1d77d8ed0429edf611048fdef5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3760131955272322461, guid: a64add1d77d8ed0429edf611048fdef5, type: 3}
       propertyPath: m_LocalPosition.x

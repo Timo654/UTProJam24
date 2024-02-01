@@ -29,6 +29,43 @@ public class FixableObject : MonoBehaviour
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
+        if (obstacleType == ObstacleType.AirPressure)
+        {
+            switch (Helper.GetControllerType())
+            {
+                case ControlType.Keyboard:
+                    hintText.text = "Mash E";
+                    break;
+                case ControlType.Mobile:
+                    hintText.text = "Mash OPEN";
+                    break;
+                case ControlType.XBOX:
+                    hintText.text = "Mash B";
+                    break;
+                case ControlType.DualShock:
+                    hintText.text = "Mash Circle";
+                    break;
+            }
+        }
+        else
+        {
+            switch (Helper.GetControllerType())
+            {
+                case ControlType.Keyboard:
+                    hintText.text = "Press E";
+                    break;
+                case ControlType.Mobile:
+                    hintText.text = "Press OPEN";
+                    break;
+                case ControlType.XBOX:
+                    hintText.text = "Press B";
+                    break;
+                case ControlType.DualShock:
+                    hintText.text = "Press Circle";
+                    break;
+            }
+        }
+        
         animator = GetComponent<Animator>();
         initialHP = itemHealth;
     }
