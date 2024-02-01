@@ -67,18 +67,20 @@ public class GameManager : MonoBehaviour
 
     private void HandlePhase2bFlag(ItemData data)
     {
+        if (phase2bFlag) return;
         phase2bFlag = true;
         phaseStart = tutorialTimer;
     }
 
     private void HandlePhase2cFlag(ItemData _)
     {
+        if (phase2cFlag) return;
         pickupCounter += 1;
         if (pickupCounter >= 2)
         {
             phase2cFlag = true;
             phaseStart = tutorialTimer;
-        }   
+        }
     }
     private void OnDisable()
     {
@@ -121,10 +123,12 @@ public class GameManager : MonoBehaviour
         switch (currentTutorialPhase)
         {
             case TutorialPhase.PresentFirst:
+                if (phase1Flag) return;
                 phase1Flag = true;
                 phaseStart = tutorialTimer;
                 break;
             case TutorialPhase.End:
+                if (phase3Flag) return;
                 phaseStart = tutorialTimer;
                 phase3Flag = true;
                 break;
@@ -201,7 +205,7 @@ public class GameManager : MonoBehaviour
                 break;
             case TutorialPhase.PresentFirst:
 
-                if (phase1BFlag && returningPlayer && (tutorialTimer > phaseStart + 0.5f))
+                if (!phase1Flag && phase1BFlag && returningPlayer && (tutorialTimer > phaseStart + 0.5f))
                 {
                     // if tutorial compelted previusly
                     currentTutorialPhase = TutorialPhase.End;

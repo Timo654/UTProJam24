@@ -48,7 +48,7 @@ public class FixableObject : MonoBehaviour
 
     public void FixObject(CurrentPlayer player)
     {
-        if (player != CurrentPlayer.Past || !interactable) return;
+        if (player != CurrentPlayer.Present || !interactable) return;
         if (obstacleType == ObstacleType.AirPressure)
         {
             itemHealth += 10f;
@@ -263,7 +263,6 @@ public class FixableObject : MonoBehaviour
     {
         inTriggerArea = true;
         if (!currentlyActive) return;
-        Debug.Log("Got near an object.");
         hintText.enabled = true;
         interactable = true;
     }
