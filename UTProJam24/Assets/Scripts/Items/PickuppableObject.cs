@@ -1,21 +1,17 @@
-using FMOD.Studio;
 using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShelfHandler : MonoBehaviour
+public class PickuppableObject : MonoBehaviour
 {
-    public static Action<List<ItemData>> OnOpenShelf;
-    public static Action OnCloseShelf;
-    [SerializeField] private List<ItemData> items;
+    public static Action<ItemData> PickUpItem;
+    [SerializeField] private ItemData itemData;
     TextMeshPro hintText;
     PlayerControls playerControls;
     InputAction openAction;
+    private bool pickupStarted = false;
     private bool interactable = false;
-    private bool shelfOpen = false;
-    private EventInstance boxSound;
     private void Awake()
     {
         hintText = transform.GetChild(0).GetComponent<TextMeshPro>(); // TODO - unhardcode prompt guide
@@ -23,17 +19,20 @@ public class ShelfHandler : MonoBehaviour
         openAction = playerControls.Gameplay.Interact;
     }
 
-    private void Start()
-    {
-        boxSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.ToolboxSound);
-    }
     private void OnEnable()
     {
         InventorySystem.ItemAdded += RemoveItem;
-        ItemSelectUI.OnCloseItemSelect += CloseUI;
         PlayerHandler.OnTimelineSwitch += HandleTimelineSwitch;
         openAction.Enable();
         openAction.performed += ShelfOpen;
+    }
+
+    private void OnDisable()
+    {
+        InventorySystem.ItemAdded -= RemoveItem;
+        PlayerHandler.OnTimelineSwitch -= HandleTimelineSwitch;
+        openAction.Disable();
+        openAction.performed -= ShelfOpen;
     }
 
     void HandleTimelineSwitch(CurrentPlayer player)
@@ -49,41 +48,26 @@ public class ShelfHandler : MonoBehaviour
         }
     }
 
-    private void CloseUI()
+    public void ShelfOpen(InputAction.CallbackContext context)
     {
-        boxSound.start();
-        shelfOpen = false;
-        OnCloseShelf?.Invoke();
-    }
-    private void OnDisable()
-    {
-        ItemSelectUI.OnCloseItemSelect += CloseUI;
-        PlayerHandler.OnTimelineSwitch += HandleTimelineSwitch;
-        InventorySystem.ItemAdded -= RemoveItem;
-        openAction.Disable();
-        openAction.performed -= ShelfOpen;
+        if (interactable)
+        {
+            pickupStarted = true;
+            PickUpItem?.Invoke(itemData);
+        }
     }
 
     private void RemoveItem(ItemData item)
     {
-        if (!shelfOpen) return;
-        items.Remove(item);
-    }
-
-    public void ShelfOpen(InputAction.CallbackContext context)
-    {
-        if (interactable && !shelfOpen)
+        if (pickupStarted)
         {
-            boxSound.start();
-            shelfOpen = true;
-            Debug.Log("opening shelf");
-            OnOpenShelf?.Invoke(items);
+            pickupStarted = false;
+            Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Got near a shelf.");
         hintText.enabled = true;
         interactable = true;
     }

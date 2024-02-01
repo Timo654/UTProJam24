@@ -160,13 +160,13 @@ public class FixableObject : MonoBehaviour
         {
             case ObstacleType.Fire:
                 burningSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.FireSound);
-                FMODUnity.RuntimeManager.AttachInstanceToGameObject(burningSound, GetComponent<Transform>());
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(burningSound, transform);
                 fixSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.FireExting);
                 // will start burning at some point. burning slowly fills the facility "broken" meter
                 break;
             case ObstacleType.WaterLeak:
                 burningSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.LeakSound);
-                FMODUnity.RuntimeManager.AttachInstanceToGameObject(burningSound, GetComponent<Transform>());
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(burningSound, transform);
                 fixSound = AudioManager.Instance.CreateInstance(FMODEvents.Instance.FixWrench);
                 // will start leaking at some point. leaking slowly fills the facility "broken" meter
                 break;

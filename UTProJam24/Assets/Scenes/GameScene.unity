@@ -704,6 +704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 278696286}
   - component: {fileID: 278696287}
+  - component: {fileID: 278696288}
   m_Layer: 0
   m_Name: ethanol
   m_TagString: Untagged
@@ -778,6 +779,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &278696288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278696285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: f3865038199110c4aa3fda9c543e415e, type: 2}
 --- !u!1 &289133096
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 289133097}
   - component: {fileID: 289133098}
+  - component: {fileID: 289133099}
   m_Layer: 0
   m_Name: pipebomb
   m_TagString: Untagged
@@ -862,6 +877,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &289133099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289133096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: a8a235a6a9e39ee468af0fc0562819bf, type: 2}
 --- !u!1 &302691576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 462817819}
   - component: {fileID: 462817820}
+  - component: {fileID: 462817821}
   m_Layer: 0
   m_Name: pipebomb
   m_TagString: Untagged
@@ -1238,6 +1267,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &462817821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462817818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: a8a235a6a9e39ee468af0fc0562819bf, type: 2}
 --- !u!1 &477748996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,6 +2120,7 @@ GameObject:
   - component: {fileID: 629801013}
   - component: {fileID: 629801014}
   - component: {fileID: 629801015}
+  - component: {fileID: 629801016}
   m_Layer: 5
   m_Name: GameplayCanvas
   m_TagString: Untagged
@@ -2276,6 +2319,18 @@ MonoBehaviour:
   inventory: {fileID: 535275619}
   itemList: {fileID: 302691577}
   itemPrefab: {fileID: 557669276478074517, guid: 61d46c27db8914643a3bceb33bb1c0ef, type: 3}
+--- !u!114 &629801016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629801005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb9a3010e93fc842952f95a81d2d843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &636679295
 GameObject:
   m_ObjectHideFlags: 0
@@ -2602,6 +2657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 674492201}
   - component: {fileID: 674492202}
+  - component: {fileID: 674492203}
   m_Layer: 0
   m_Name: gun
   m_TagString: Untagged
@@ -2676,6 +2732,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &674492203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674492200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: eb59aacaeca52024194c49acad40c3d0, type: 2}
 --- !u!1 &680751280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,6 +2755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 680751281}
   - component: {fileID: 680751282}
+  - component: {fileID: 680751283}
   m_Layer: 0
   m_Name: fireextinguisher
   m_TagString: Untagged
@@ -2760,6 +2830,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &680751283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680751280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 6e0dbf0f28d6bdd4aa8e3ec96f0355db, type: 2}
 --- !u!1 &701694368
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,6 +3181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 739415227}
   - component: {fileID: 739415228}
+  - component: {fileID: 739415229}
   m_Layer: 0
   m_Name: ethanol
   m_TagString: Untagged
@@ -3172,6 +3256,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &739415229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739415226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: f3865038199110c4aa3fda9c543e415e, type: 2}
 --- !u!1 &739554289
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,6 +3657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 837630570}
   - component: {fileID: 837630571}
+  - component: {fileID: 837630572}
   m_Layer: 0
   m_Name: gun
   m_TagString: Untagged
@@ -3634,6 +3732,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &837630572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837630569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: eb59aacaeca52024194c49acad40c3d0, type: 2}
 --- !u!1 &838303074
 GameObject:
   m_ObjectHideFlags: 0
@@ -4102,6 +4213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1108046366}
   - component: {fileID: 1108046367}
+  - component: {fileID: 1108046368}
   m_Layer: 0
   m_Name: gasoline
   m_TagString: Untagged
@@ -4176,6 +4288,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1108046368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108046365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 7facee0f19312d14f99fef008f3af22c, type: 2}
 --- !u!1001 &1120789248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5460,6 +5585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1473172076}
   - component: {fileID: 1473172077}
+  - component: {fileID: 1473172078}
   m_Layer: 0
   m_Name: tape
   m_TagString: Untagged
@@ -5534,6 +5660,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1473172078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473172075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: f2b4c6a81856a6449bef9d135f3a0a9e, type: 2}
 --- !u!1 &1502374203
 GameObject:
   m_ObjectHideFlags: 0
@@ -5988,6 +6127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1677175171}
   - component: {fileID: 1677175172}
+  - component: {fileID: 1677175173}
   m_Layer: 0
   m_Name: icecream
   m_TagString: Untagged
@@ -6062,6 +6202,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1677175173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677175170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 0836d006fca68dd4e97949e34a9d54c1, type: 2}
 --- !u!1 &1712426610
 GameObject:
   m_ObjectHideFlags: 0
@@ -6986,6 +7139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1878288577}
   - component: {fileID: 1878288578}
+  - component: {fileID: 1878288579}
   m_Layer: 0
   m_Name: wrench
   m_TagString: Untagged
@@ -7060,6 +7214,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1878288579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878288576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 75a89e9acec1cd2408fc992945f8de4e, type: 2}
 --- !u!1 &1894282305
 GameObject:
   m_ObjectHideFlags: 0
@@ -7834,6 +8001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1962198592}
   - component: {fileID: 1962198593}
+  - component: {fileID: 1962198594}
   m_Layer: 0
   m_Name: fireextinguisher
   m_TagString: Untagged
@@ -7908,6 +8076,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1962198594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962198591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 6e0dbf0f28d6bdd4aa8e3ec96f0355db, type: 2}
 --- !u!1 &1990184322
 GameObject:
   m_ObjectHideFlags: 0
@@ -8089,6 +8270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1995863962}
   - component: {fileID: 1995863963}
+  - component: {fileID: 1995863964}
   m_Layer: 0
   m_Name: hammer
   m_TagString: Untagged
@@ -8163,6 +8345,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1995863964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995863961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfa86fb950592b4d8e9ddfabc244fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 4ac16b74993147c44a33648def0b4aa5, type: 2}
 --- !u!1 &2059588786
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ public class PlayerHandler : MonoBehaviour
 {
     //hardcoded two players yeah
     public static Action<CurrentPlayer> OnTimelineSwitch; // TODO - finish implementing this to fix shit
-    public static Action funnyTest;
     [SerializeField] private Player_Walk[] playerWalk;
     [SerializeField] private Player_Jump[] playerJump;
     private int playerIndex = 1; // TODO THIS IS DEBUGGGG REMEMBER
@@ -48,8 +47,6 @@ public class PlayerHandler : MonoBehaviour
             playerIndex = 0;
         }
         OnTimelineSwitch?.Invoke((CurrentPlayer)playerIndex);
-        funnyTest.Invoke();
-        Debug.Log("timeline swicho");
     }
 
     private void HandleSwitch()

@@ -47,6 +47,7 @@ public class Player_Walk : MonoBehaviour
                 playerFootsteps = AudioManager.Instance.CreateInstance(FMODEvents.Instance.StepsPast);
                 break;
         }
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(playerFootsteps, transform, body);
     }
 
     //public void CreateDust()

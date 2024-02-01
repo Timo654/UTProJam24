@@ -45,13 +45,11 @@ public class CameraSwitcher : MonoBehaviour
 
     private void OnOpenMenu()
     {
-        Debug.Log("menu open!");
         isInMenu = true;
     }
 
     private void OnCloseMenu()
     {
-        Debug.Log("menu close!");
         isInMenu = false;
     }
 
