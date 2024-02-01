@@ -4,14 +4,22 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
+    // INPUTS
     public static Action<CurrentPlayer> interact;
     public static Action switchTimeline;
+    public static Action pause;
+    public static Action back;
+
+    // BOOLS TO CHECK STUFF
     private bool uiOpen = false;
     private bool tutorialOpen = false;
     private bool timelineSwitchEnabled = true;
     private bool isMidTransition = false;
+    private bool isPaused = false;
     private InputAction interactInput;
     private InputAction cameraAction;
+    private InputAction pauseAction;
+    private InputAction backAction;
     private CurrentPlayer currentPlayer;
     // Start is called before the first frame update
     void Awake()
@@ -19,6 +27,8 @@ public class InputHandler : MonoBehaviour
         PlayerControls playerControls = new();
         interactInput = playerControls.Gameplay.Interact;
         cameraAction = playerControls.Gameplay.SwitchTimeline;
+        pauseAction = playerControls.UI.Pause;
+        backAction = playerControls.UI.Back;
     }
 
     private void OnEnable()
@@ -27,6 +37,10 @@ public class InputHandler : MonoBehaviour
         cameraAction.Enable();
         cameraAction.performed += TimelineSwitchPerformed;
         interactInput.performed += InteractPerformed;
+        pauseAction.Enable();
+        backAction.Enable();
+        pauseAction.performed += PausePerformed;
+        backAction.performed += BackPerformed;
         GameManager.SetTimelineSwitch += SetCanTimelineSwitch;
         ItemSelectUI.OnOpenItemSelect += OnOpenMenu;
         ItemSelectUI.OnCloseItemSelect += OnCloseMenu;
@@ -36,6 +50,7 @@ public class InputHandler : MonoBehaviour
         CameraSwitcher.OnStartCameraSwitch += StartTransition;
         CameraSwitcher.OnCameraSwitched += EndTransition;
         PlayerHandler.OnTimelineSwitch += TogglePlayer;
+        PauseMenuController.GamePaused += TogglePause;
     }
     private void OnDisable()
     {
@@ -43,6 +58,10 @@ public class InputHandler : MonoBehaviour
         interactInput.performed -= InteractPerformed;
         cameraAction.Disable();
         cameraAction.performed -= TimelineSwitchPerformed;
+        pauseAction.Disable();
+        backAction.Disable();
+        pauseAction.performed -= PausePerformed;
+        backAction.performed -= BackPerformed;
         GameManager.SetTimelineSwitch -= SetCanTimelineSwitch;
         ItemSelectUI.OnOpenItemSelect -= OnOpenMenu;
         ItemSelectUI.OnCloseItemSelect -= OnCloseMenu;
@@ -52,23 +71,29 @@ public class InputHandler : MonoBehaviour
         CameraSwitcher.OnStartCameraSwitch -= StartTransition;
         CameraSwitcher.OnCameraSwitched -= EndTransition;
         PlayerHandler.OnTimelineSwitch -= TogglePlayer;
+        PauseMenuController.GamePaused -= TogglePause;
     }
 
-    void TogglePlayer(CurrentPlayer curPlayer)
+    private void TogglePause(bool obj)
+    {
+        isPaused = obj;
+    }
+
+    private void TogglePlayer(CurrentPlayer curPlayer)
     {
         currentPlayer = curPlayer;
     }
 
-    void StartTransition()
+    private void StartTransition()
     {
         isMidTransition = true;
     }
 
-    void EndTransition()
+    private void EndTransition()
     {
         isMidTransition = false;
     }
-    void HandleBottomDialogueToggle(bool enabled)
+    private void HandleBottomDialogueToggle(bool enabled)
     {
         tutorialOpen = enabled;
     }
@@ -88,15 +113,25 @@ public class InputHandler : MonoBehaviour
         uiOpen = true;
     }
 
-    public void InteractPerformed(InputAction.CallbackContext context)
+    private void InteractPerformed(InputAction.CallbackContext context)
     {
-        if (uiOpen || tutorialOpen || isMidTransition) return;
+        if (uiOpen || tutorialOpen || isMidTransition || isPaused) return;
         interact?.Invoke(currentPlayer);
     }
 
-    public void TimelineSwitchPerformed(InputAction.CallbackContext context)
+    private void TimelineSwitchPerformed(InputAction.CallbackContext context)
     {
-        if (uiOpen || tutorialOpen || !timelineSwitchEnabled || isMidTransition) return;
+        if (uiOpen || tutorialOpen || !timelineSwitchEnabled || isMidTransition || isPaused) return;
         switchTimeline?.Invoke();
+    }
+
+    private void PausePerformed(InputAction.CallbackContext context)
+    {
+        pause?.Invoke();
+    }
+
+    private void BackPerformed(InputAction.CallbackContext context)
+    {
+        back?.Invoke();
     }
 }

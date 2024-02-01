@@ -13,9 +13,8 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private Button settingsBackButton;
     [SerializeField] private GameObject firstSelectedUIElement;
     [SerializeField] private GameObject touchUI;
-    private PlayerControls playerControls;
-    private InputAction pauseAction;
-    private InputAction backAction;
+    private bool pauseSubscribed = true;
+    
     private CanvasGroup optionsMenuCG;
     private CanvasGroup pauseMenuCG;
     private CanvasGroup pauseButtonsCG;
@@ -31,9 +30,6 @@ public class PauseMenuController : MonoBehaviour
         optionsMenuCG = optionsMenu.AddComponent<CanvasGroup>();
         pauseMenuCG = pauseMenu.AddComponent<CanvasGroup>();
         pauseButtonsCG = pauseButtons.AddComponent<CanvasGroup>();
-        playerControls = new PlayerControls();
-        pauseAction = playerControls.UI.Pause;
-        backAction = playerControls.UI.Back;
         lastSelect = firstSelectedUIElement;
         if (touchUI != null)
         {
@@ -50,9 +46,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void OnEnable()
     {
-        pauseAction.Enable();
-        pauseAction.performed += OnPauseButton;
-        backAction.performed += OnPauseButton;
+        InputHandler.pause += OnPauseButton;
         LevelChanger.OnFadeInFinished += EnablePause;
         ItemSelectUI.OnOpenItemSelect += DisablePause;
         ItemSelectUI.OnCloseItemSelect += EnablePause;
@@ -60,10 +54,8 @@ public class PauseMenuController : MonoBehaviour
 
     public void OnDisable()
     {
-        pauseAction.performed -= OnPauseButton;
-        pauseAction.Disable();
-        backAction.performed -= OnPauseButton;
-        backAction.Disable();
+        InputHandler.pause -= OnPauseButton;
+        InputHandler.back -= OnPauseButton;
         LevelChanger.OnFadeInFinished -= EnablePause;
         ItemSelectUI.OnOpenItemSelect -= DisablePause;
         ItemSelectUI.OnCloseItemSelect -= EnablePause;
@@ -96,9 +88,13 @@ public class PauseMenuController : MonoBehaviour
                 lastSelect = EVRef.currentSelectedGameObject;
             }
         }
+        else if (!pauseSubscribed)
+        {
+            SubscribeToPause();
+        }
     }
 
-    public void OnPauseButton(InputAction.CallbackContext context)
+    public void OnPauseButton()
     {
         if (settingsBackButton != null && settingsBackButton.IsActive()) settingsBackButton.onClick.Invoke();
         else HandlePause();
@@ -116,6 +112,21 @@ public class PauseMenuController : MonoBehaviour
         else PauseGame();
     }
 
+    private void SubscribeToBack()
+    {
+        if (!pauseSubscribed) return;
+        InputHandler.back += OnPauseButton;
+        InputHandler.pause -= OnPauseButton;
+        pauseSubscribed = false;
+    }
+
+    private void SubscribeToPause()
+    {
+        if (pauseSubscribed) return;
+        InputHandler.back -= OnPauseButton;
+        InputHandler.pause += OnPauseButton;
+        pauseSubscribed = true;
+    }
     void PauseGame()
     {
         if (Time.timeScale < 1.0f) return;
@@ -124,17 +135,16 @@ public class PauseMenuController : MonoBehaviour
         UIFader.FadeCanvasGroup(pauseMenuCG);
         EVRef.SetSelectedGameObject(firstSelectedUIElement);
         AudioManager.Pause();
-        backAction.Enable();
         isPaused = true;
     }
 
     void UnpauseGame()
     {
+        SubscribeToPause();
         Time.timeScale = 1f;
         GamePaused?.Invoke(false);
         pauseMenu.SetActive(false);
         AudioManager.Unpause();
-        backAction.Disable();
         isPaused = false;
     }
 
@@ -142,10 +152,12 @@ public class PauseMenuController : MonoBehaviour
     {
         if (optionsMenu.activeSelf)
         {
+            SubscribeToPause();
             UIFader.FadeObjects(pauseButtons, pauseButtonsCG, optionsMenu, optionsMenuCG);
         }
         else
         {
+            SubscribeToBack();
             UIFader.FadeObjects(optionsMenu, optionsMenuCG, pauseButtons, pauseButtonsCG);
         }
     }

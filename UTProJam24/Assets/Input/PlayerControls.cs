@@ -194,6 +194,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SkipCredits"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5bece870-21f1-422d-9cd9-1f290a2fcfe8"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SkipCredits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },

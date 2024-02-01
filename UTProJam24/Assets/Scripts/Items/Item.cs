@@ -7,6 +7,7 @@ public class Item : MonoBehaviour
 {
     public static Action<ItemData> TryAddItemToInventory;
     public static Action<ItemData> ItemUseConfirm;
+    public static Action ItemDestroyed;
     public ItemData itemData;
     private Image image;
     private TextMeshProUGUI itemText;
@@ -46,6 +47,7 @@ public class Item : MonoBehaviour
 
     private void OnItemAddedToInventory(ItemData data)
     {
+        ItemDestroyed?.Invoke();
         if (itemData == data) Destroy(gameObject); // FIXME - does not allow duplicates. Investigate if this breaks UI??
     }
 }

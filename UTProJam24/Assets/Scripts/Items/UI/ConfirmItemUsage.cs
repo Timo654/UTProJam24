@@ -1,5 +1,7 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ConfirmItemUsage : MonoBehaviour
 {
@@ -8,10 +10,11 @@ public class ConfirmItemUsage : MonoBehaviour
     [SerializeField] private InventorySystem inventory;
     [SerializeField] private Transform itemList;
     [SerializeField] GameObject itemPrefab;
+    private EventSystem evSys;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
+        evSys = EventSystem.current;
     }
     private void OnEnable()
     {
@@ -24,22 +27,39 @@ public class ConfirmItemUsage : MonoBehaviour
         FixableObject.ConfirmItemUse -= OnShowConfirmation;
         Item.ItemUseConfirm -= CloseBox;
     }
+
+    void SubscribeToNaviEvents()
+    {
+        InputHandler.back += CloseBox;
+    }
+
+    void UnsubscribeFromNaviEvents()
+    {
+        InputHandler.back -= CloseBox;
+    }
     public void OnShowConfirmation()
     {
         if (itemList.parent.gameObject.activeSelf) return;
+        SubscribeToNaviEvents();
         foreach (var item in inventory.items)
         {
             var button = Instantiate(itemPrefab, itemList.position, itemList.rotation, itemList);
             var buttonScript = button.GetComponent<Item>();
             buttonScript.SetupItem(item, true, true);
         }
+        evSys.SetSelectedGameObject(itemList.GetChild(0).gameObject);
         itemList.parent.gameObject.SetActive(true);
         OpenUI?.Invoke();
     }
 
     public void CloseBox(ItemData _)
     {
+        CloseBox();
+    }
+    public void CloseBox()
+    {
         if (!itemList.parent.gameObject.activeSelf) return;
+        UnsubscribeFromNaviEvents();
         itemList.parent.gameObject.SetActive(false);
         // kill the children
         for (int i = 0; i < itemList.childCount; i++)
