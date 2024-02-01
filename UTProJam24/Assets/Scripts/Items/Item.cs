@@ -7,6 +7,7 @@ public class Item : MonoBehaviour
 {
     public static Action<ItemData> TryAddItemToInventory;
     public static Action<ItemData> ItemUseConfirm;
+    public static Action ItemDestroyed;
     public ItemData itemData;
     private Image image;
     private TextMeshProUGUI itemText;
@@ -17,7 +18,14 @@ public class Item : MonoBehaviour
         itemText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         itemData = data;
         image.sprite = data.sprite;
-        itemText.text = data.displayName;
+        if (isInteractable && !isConfirmUI ) // disable text in item select cause its too long usually
+        {
+            itemText.text = "";
+        }
+        else
+        {
+            itemText.text = data.displayName;
+        }
         confirmUI = isConfirmUI;
         GetComponent<Button>().interactable = isInteractable;
     }
@@ -46,6 +54,7 @@ public class Item : MonoBehaviour
 
     private void OnItemAddedToInventory(ItemData data)
     {
+        ItemDestroyed?.Invoke();
         if (itemData == data) Destroy(gameObject); // FIXME - does not allow duplicates. Investigate if this breaks UI??
     }
 }

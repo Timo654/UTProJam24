@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static Action StartGame;
     public static Action<bool> AllowMovement;
+    public static Action<bool> AllowInteract;
     public static Action<bool> SetTimelineSwitch;
     private bool tutorialMode = true;
     [SerializeField] private EndingData[] endings;
@@ -16,10 +17,13 @@ public class GameManager : MonoBehaviour
     private float phaseStart;
     private float tutorialTimer;
     private bool returningPlayer = false;
-    private bool phase1BFlag = false;
-    private bool phase1Flag = false;
-    private bool phase2Flag = false;
-    private bool phase3Flag = false;
+    private bool phase1BFlag = false; // did a sick flip to skip the tutorial
+    private bool phase1Flag = false; // switched timelines
+    private bool phase2Flag = false; // closed shelf
+    private bool phase2bFlag = false; // picked item from shelf
+    private bool phase2cFlag = false; // inventory full
+    private bool phase3Flag = false; // went back to present
+    private int pickupCounter;
     [SerializeField] private DialogueAsset[] tutorialTextBottom; // file for each phase
     [SerializeField] private DialogueAsset[] tutorialTextTop; // file for each phase
     [SerializeField] private DialogueManager dialogueManager;
@@ -41,18 +45,20 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("enagle!");
+        // TODO - cleanup, unsubscribe from tutorial events once tutorial ends
         LevelChanger.OnFadeInFinished += HandleStart;
         FacilityHandler.OnFacilityDestroyed += HandleEnding;
         FacilityHandler.OnFacilitySaved += HandleEnding;
         ShelfHandler.OnCloseShelf += HandlePhase2SwitchFlag;
         DialogueManager.OnBottomDialogueStateChanged += HandleBottomDialogueToggle;
         DialogueManager.OnTopDialogueStateChanged += HandleTopDialogueToggle;
-        PlayerHandler.funnyTest += InvokeTest;
-        ItemSelectUI.OnOpenItemSelect += DisableMovement;
+        PlayerHandler.OnTimelineSwitch += SetFlags;
+        ItemSelectUI.OnOpenItemSelect += DisableMovement; // TODO - move to inputhandler?
         ItemSelectUI.OnCloseItemSelect += EnableMovement;
         ConfirmItemUsage.OpenUI += DisableMovement;
         ConfirmItemUsage.CloseUI += EnableMovement;
+        InventorySystem.ItemAdded += HandlePhase2bFlag;
+        PickuppableObject.PickUpItem += HandlePhase2cFlag;
         if (returningPlayer)
         {
             AllowMovement += EnableJumpCheck;
@@ -60,6 +66,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void HandlePhase2bFlag(ItemData data)
+    {
+        if (phase2bFlag) return;
+        phase2bFlag = true;
+        phaseStart = tutorialTimer;
+    }
+
+    private void HandlePhase2cFlag(ItemData _)
+    {
+        if (phase2cFlag) return;
+        pickupCounter += 1;
+        if (pickupCounter >= 2)
+        {
+            phase2cFlag = true;
+            phaseStart = tutorialTimer;
+        }
+    }
     private void OnDisable()
     {
         LevelChanger.OnFadeInFinished -= HandleStart;
@@ -68,11 +91,13 @@ public class GameManager : MonoBehaviour
         ShelfHandler.OnCloseShelf -= HandlePhase2SwitchFlag;
         DialogueManager.OnBottomDialogueStateChanged -= HandleBottomDialogueToggle;
         DialogueManager.OnTopDialogueStateChanged -= HandleTopDialogueToggle;
-        PlayerHandler.funnyTest -= InvokeTest;
+        PlayerHandler.OnTimelineSwitch -= SetFlags;
         ItemSelectUI.OnOpenItemSelect -= DisableMovement;
         ItemSelectUI.OnCloseItemSelect -= EnableMovement;
         ConfirmItemUsage.OpenUI -= DisableMovement;
         ConfirmItemUsage.CloseUI -= EnableMovement;
+        InventorySystem.ItemAdded -= HandlePhase2bFlag;
+        PickuppableObject.PickUpItem -= HandlePhase2cFlag;
         if (returningPlayer)
         {
             AllowMovement -= EnableJumpCheck;
@@ -94,17 +119,17 @@ public class GameManager : MonoBehaviour
         if (enabled) jump.Enable();
         else jump.Disable();
     }
-    void InvokeTest()
+    void SetFlags(CurrentPlayer _)
     {
-        Debug.Log(currentTutorialPhase);
         switch (currentTutorialPhase)
         {
             case TutorialPhase.PresentFirst:
+                if (phase1Flag) return;
                 phase1Flag = true;
                 phaseStart = tutorialTimer;
-                Debug.Log("ph1 flag set");
                 break;
             case TutorialPhase.End:
+                if (phase3Flag) return;
                 phaseStart = tutorialTimer;
                 phase3Flag = true;
                 break;
@@ -113,7 +138,6 @@ public class GameManager : MonoBehaviour
     private void HandleStart()
     {
         Time.timeScale = 1.0f;
-        Debug.Log("start!");
         AudioManager.Instance.InitializeMusic(FMODEvents.Instance.MainTheme);
         AudioManager.Instance.StartMusic();
         if (!tutorialMode)
@@ -132,6 +156,7 @@ public class GameManager : MonoBehaviour
 
     private void HandlePhase2SwitchFlag()
     {
+        if (!phase2bFlag) return;
         switch (currentTutorialPhase)
         {
             case TutorialPhase.PastFirst:
@@ -149,19 +174,16 @@ public class GameManager : MonoBehaviour
                 phase1BFlag = true;
                 phaseStart = tutorialTimer;
                 jump.Disable();
-                Debug.Log("ph1b flag set");
                 break;
         }
     }
     void HandleBottomDialogueToggle(bool enabled)
     {
-        Debug.Log($"botom dialogue state: {enabled}");
         bottomDialogueActive = enabled;
     }
 
     void HandleTopDialogueToggle(bool enabled)
     {
-        Debug.Log($"top dialogue state: {enabled}");
         topDialogueActive = enabled;
     }
 
@@ -171,6 +193,7 @@ public class GameManager : MonoBehaviour
         {
             case TutorialPhase.Start:
                 AllowMovement?.Invoke(false);
+                AllowInteract?.Invoke(false);
                 if (returningPlayer)
                 {
                     dialogueManager.StartDialogue(tutorialTextBottom[4], DialogueManager.DialogueType.Bottom);
@@ -182,11 +205,10 @@ public class GameManager : MonoBehaviour
 
                 currentTutorialPhase = TutorialPhase.PresentFirst;
                 phaseStart = tutorialTimer;
-                Debug.Log("SWITCH TO TUTORIAL PRESENT 1ST");
                 break;
             case TutorialPhase.PresentFirst:
 
-                if (phase1BFlag && returningPlayer && (tutorialTimer > phaseStart + 0.5f))
+                if (!phase1Flag && phase1BFlag && returningPlayer && (tutorialTimer > phaseStart + 0.5f))
                 {
                     // if tutorial compelted previusly
                     currentTutorialPhase = TutorialPhase.End;
@@ -196,20 +218,16 @@ public class GameManager : MonoBehaviour
                 else if (phase1Flag && (tutorialTimer > phaseStart + 1.5f)) // add a delay between trigger and stuff
                 {
                     dialogueManager.ResetTopDialogue(); // end top dialogue
-                    Debug.Log("ph1 flag set and read");
-
                     dialogueManager.StartDialogue(tutorialTextBottom[1], DialogueManager.DialogueType.Bottom);
                     if (!bottomDialogueActive)
                     {
                         currentTutorialPhase = TutorialPhase.PastFirst;
                         phaseStart = tutorialTimer;
-                        Debug.Log("bottom no active");
+                        AllowInteract?.Invoke(true);
                         if (!topDialogueActive)
                         {
-                            Debug.Log("start top1");
                             dialogueManager.StartDialogue(tutorialTextTop[1], DialogueManager.DialogueType.Top);
                         }
-                        Debug.Log("SWITCH TO TUTORIAL PAST 1ST");
                         SetTimelineSwitch?.Invoke(false);
                     }
                 }
@@ -218,7 +236,6 @@ public class GameManager : MonoBehaviour
                     if (!topDialogueActive)
                     {
                         AllowMovement?.Invoke(true);
-                        Debug.Log("start top0");
                         if (returningPlayer)
                         {
                             dialogueManager.StartDialogue(tutorialTextTop[3], DialogueManager.DialogueType.Top);
@@ -232,7 +249,25 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case TutorialPhase.PastFirst:
-                if (phase2Flag && (tutorialTimer > phaseStart + 1.5f))
+                if (phase2cFlag && (tutorialTimer > phaseStart + 1.5f))
+                {
+                    phaseStart = tutorialTimer;
+                    dialogueManager.ResetTopDialogue(); // end top dialogue
+
+                    dialogueManager.StartDialogue(tutorialTextBottom[6], DialogueManager.DialogueType.Bottom);
+
+                    if (!bottomDialogueActive)
+                    {
+                        phaseStart = tutorialTimer;
+                        currentTutorialPhase = TutorialPhase.End;
+                        if (!topDialogueActive)
+                        {
+                            dialogueManager.StartDialogue(tutorialTextTop[2], DialogueManager.DialogueType.Top);
+                            SetTimelineSwitch?.Invoke(true);
+                        }
+                    }
+                }
+                else if (phase2Flag && phase2bFlag && (tutorialTimer > phaseStart + 1.5f))
                 {
                     dialogueManager.ResetTopDialogue(); // end top dialogue
 
@@ -241,14 +276,13 @@ public class GameManager : MonoBehaviour
                     if (!bottomDialogueActive)
                     {
                         phaseStart = tutorialTimer;
+                        AllowInteract?.Invoke(false);
                         currentTutorialPhase = TutorialPhase.End;
                         if (!topDialogueActive)
                         {
-                            Debug.Log("start top2");
                             dialogueManager.StartDialogue(tutorialTextTop[2], DialogueManager.DialogueType.Top);
                             SetTimelineSwitch?.Invoke(true);
                         }
-                        Debug.Log("SWITCH TO TUTORIAL END");
                     }
                 }
                 break;
@@ -260,6 +294,7 @@ public class GameManager : MonoBehaviour
                     if (tutorialTimer > phaseStart + 0.5f)
                     {
                         SetTimelineSwitch?.Invoke(true);
+                        AllowInteract?.Invoke(true);
                         tutorialMode = false;
                         StartGame?.Invoke();
                     }
@@ -270,6 +305,7 @@ public class GameManager : MonoBehaviour
                     dialogueManager.StartDialogue(tutorialTextBottom[3], DialogueManager.DialogueType.Bottom);
                     if (tutorialTimer > phaseStart + 3f)
                     {
+                        AllowInteract?.Invoke(true);
                         tutorialMode = false;
                         SaveManager.Instance.gameData.tutorialDone = true;
                         StartGame?.Invoke();
@@ -281,8 +317,6 @@ public class GameManager : MonoBehaviour
 
     private void HandleEnding(EndingType endingType)
     {
-        Debug.Log("ending!");
-        Debug.Log(endingType);
         foreach (EndingData ending in endings)
         {
             if (ending.endingType == endingType)

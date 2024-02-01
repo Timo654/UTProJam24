@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -10,6 +11,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject exitButton;
     [SerializeField] private GameObject optionsButton;
     [SerializeField] private Button optionsBackButton;
+    [SerializeField] private TextMeshProUGUI versionText;
     private PlayerControls playerControls;
     private InputAction backAction;
     private CanvasGroup menuButtonsCG;
@@ -23,6 +25,7 @@ public class MainMenuController : MonoBehaviour
         menuButtonsCG = menuButtons.AddComponent<CanvasGroup>();
         optionsMenuCG = optionsMenu.AddComponent<CanvasGroup>();
         lastSelect = EventSystem.current.firstSelectedGameObject;
+        versionText.text = $"Ver {Application.version}";
     }
     // Start is called before the first frame update
     void Start()

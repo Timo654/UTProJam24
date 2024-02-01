@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject topTutorialBox;
     public GameObject touchButton;
     private ControlType controller;
+    private bool gamePaused;
     private readonly int[] variables = new int[10];
     public void Awake()
     {
@@ -49,10 +50,12 @@ public class DialogueManager : MonoBehaviour
     private void OnEnable()
     {
         interactAction.performed += OnSkipBottomLine;
+        PauseMenuController.GamePaused += TogglePause;
     }
     private void OnDisable()
     {
         interactAction.performed -= OnSkipBottomLine;
+        PauseMenuController.GamePaused -= TogglePause;
     }
 
     public void SetVariable(int variableIndex, int value)
@@ -60,7 +63,10 @@ public class DialogueManager : MonoBehaviour
         variables[variableIndex] = value;
     }
 
-
+    private void TogglePause(bool enable)
+    {
+        gamePaused = enable;
+    }
     void UpdateBottomText()
     {
         bottomTutorialText.text = TextParser(currentBottomDialogue, currentBottomLine);
@@ -212,6 +218,7 @@ public class DialogueManager : MonoBehaviour
 
     void SkipBottomLine()
     {
+        if (gamePaused) return;
         if (currentBottomLine + 1 >= currentBottomDialogue.dialogue.Length)
         {
             EndBottomText();

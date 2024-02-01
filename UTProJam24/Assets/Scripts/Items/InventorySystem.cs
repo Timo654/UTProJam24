@@ -30,14 +30,12 @@ public class InventorySystem : MonoBehaviour
     {
         if (inventorySize <= items.Count)
         {
-            Debug.Log("INVENTORY FULL!!");
             InventoryFull?.Invoke();
             return;
         }
 
         if (items.Contains(item))
         {
-            Debug.Log("ITEM ALREADY EXISTS!");
             ItemAlreadyInInventory?.Invoke();
             return;
         }
@@ -59,7 +57,6 @@ public class InventorySystem : MonoBehaviour
         var buttonScript = button.GetComponent<Item>();
         displayItemList.Add(buttonScript);
         buttonScript.SetupItem(item, false);
-        Debug.Log($"added {item}");
     }
 
     private void RemoveDisplayItem(ItemData item)
@@ -72,7 +69,6 @@ public class InventorySystem : MonoBehaviour
             Debug.Log(item);
             if (displayItem.itemData == item)
             {
-                Debug.Log("item found");
                 Destroy(displayItem.gameObject);
                 break;
             }

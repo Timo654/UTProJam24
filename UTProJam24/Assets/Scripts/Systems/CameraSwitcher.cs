@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CameraSwitcher : MonoBehaviour
 {
@@ -9,59 +8,24 @@ public class CameraSwitcher : MonoBehaviour
     [SerializeField] Camera pastCamera;
     [SerializeField] Camera futureCamera;
     private Animator cameraAnim;
-    private PlayerControls playerControls;
-    private InputAction cameraAction;
-    private bool canSwitch = false;
-    private bool isInMenu = false;
     // Start is called before the first frame update
     void Awake()
     {
-        playerControls = new PlayerControls();
-        cameraAction = playerControls.Gameplay.SwitchTimeline;
         cameraAnim = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
-        GameManager.SetTimelineSwitch += SetCanTimelineSwitch;
-        ItemSelectUI.OnOpenItemSelect += OnOpenMenu;
-        ItemSelectUI.OnCloseItemSelect += OnCloseMenu;
-        ConfirmItemUsage.OpenUI += OnOpenMenu;
-        ConfirmItemUsage.CloseUI += OnCloseMenu;
-        cameraAction.Enable();
-        cameraAction.performed += OnCameraButton;
+        InputHandler.switchTimeline += OnCameraButton;
     }
 
     private void OnDisable()
     {
-        GameManager.SetTimelineSwitch -= SetCanTimelineSwitch;
-        ItemSelectUI.OnOpenItemSelect -= OnOpenMenu;
-        ItemSelectUI.OnCloseItemSelect -= OnCloseMenu;
-        ConfirmItemUsage.OpenUI -= OnOpenMenu;
-        ConfirmItemUsage.CloseUI -= OnCloseMenu;
-        cameraAction.Disable();
-        cameraAction.performed -= OnCameraButton;
+        InputHandler.switchTimeline -= OnCameraButton;
     }
 
-    private void OnOpenMenu()
+    public void OnCameraButton()
     {
-        Debug.Log("menu open!");
-        isInMenu = true;
-    }
-
-    private void OnCloseMenu()
-    {
-        Debug.Log("menu close!");
-        isInMenu = false;
-    }
-
-    private void SetCanTimelineSwitch(bool state)
-    {
-        canSwitch = state;
-    }
-    public void OnCameraButton(InputAction.CallbackContext context)
-    {
-        if (!(canSwitch && !isInMenu)) return;
         if (!cameraAnim.GetCurrentAnimatorStateInfo(0).IsName("CameraAnimation"))
         {
             OnStartCameraSwitch.Invoke();

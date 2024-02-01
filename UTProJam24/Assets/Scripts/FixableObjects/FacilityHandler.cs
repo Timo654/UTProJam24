@@ -34,6 +34,7 @@ public class FacilityHandler : MonoBehaviour
         if (facilityHealth <= 0f)
         {
             OnFacilityDestroyed.Invoke(EndingType.BadEnding);
+            started = false;
         }
         if (Time.time > nextCheckTime)
         {
@@ -73,6 +74,7 @@ public class FacilityHandler : MonoBehaviour
     }
     private void FacilitySaved()
     {
+        started = false;
         OnFacilitySaved?.Invoke(EndingType.GoodEnding);
     }
     private void DecreaseFacilityHealth(float decrAmount)

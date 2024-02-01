@@ -194,6 +194,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SkipCredits"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5bece870-21f1-422d-9cd9-1f290a2fcfe8"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SkipCredits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -374,7 +385,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Left Stick (Gamepad)"",
                     ""id"": ""bb6ea30f-7c3c-4926-93ca-4ab3d09600b2"",
-                    ""path"": ""1DAxis"",
+                    ""path"": ""1DAxis(whichSideWins=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -387,7 +398,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""1ac0ae87-0087-430c-ad77-fa62ed3b1114"",
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Scale(factor=100),Clamp(max=1)"",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
@@ -398,7 +409,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""82f1b5e1-24ef-4163-b321-e38653fc8768"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Scale(factor=100),Clamp(max=1)"",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
