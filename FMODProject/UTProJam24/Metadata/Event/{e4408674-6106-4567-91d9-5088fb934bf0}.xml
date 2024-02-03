@@ -98,7 +98,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{14ff05f9-4fed-4d81-98db-9e1290242828}">
 		<property name="volume">
-			<value>4</value>
+			<value>-9</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -118,7 +118,11 @@
 			<destination>{8ccddc0a-3d3b-47ad-8bfe-a0e0f6876545}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{d8f4008e-0867-4f32-94ff-ec20f9d2ba9d}" />
+	<object class="MixerBusPanner" id="{d8f4008e-0867-4f32-94ff-ec20f9d2ba9d}">
+		<property name="stereoPan">
+			<value>-76</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{e161018a-910f-4def-bcad-c797484bc30d}" />
 	<object class="RandomizerModulator" id="{898abd03-a8c5-4035-936a-67b27bb86bab}">
 		<property name="nameOfPropertyBeingModulated">
@@ -135,7 +139,7 @@
 	</object>
 	<object class="MixerBusPanner" id="{6b3a3add-b74e-4139-81cc-444fd9981bfd}">
 		<property name="stereoPan">
-			<value>-34</value>
+			<value>-20</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{8ccddc0a-3d3b-47ad-8bfe-a0e0f6876545}" />
