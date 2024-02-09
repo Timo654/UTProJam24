@@ -99,6 +99,9 @@
 		<property name="length">
 			<value>85.333310657596371</value>
 		</property>
+		<relationship name="fadeInCurve">
+			<destination>{530db1cf-6c23-4c66-84f3-804bce9b2bcb}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{7a3b95d4-f342-4f3b-a7a6-ff4c9e59b430}</destination>
 		</relationship>
@@ -110,6 +113,9 @@
 		<property name="length">
 			<value>85.333310657596371</value>
 		</property>
+		<relationship name="fadeInCurve">
+			<destination>{c201f650-dd4f-4b39-9b3e-9798b4ca75ee}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{d05040fc-e4f8-4d3c-884a-5e240394ec08}</destination>
 		</relationship>
@@ -170,7 +176,7 @@
 			<value>102</value>
 		</property>
 		<property name="length">
-			<value>85.333310657596371</value>
+			<value>85.270810657596371</value>
 		</property>
 		<property name="transitionOffset">
 			<value>1</value>
@@ -195,6 +201,22 @@
 	</object>
 	<object class="MixerBusPanner" id="{9dc1dca9-e529-43ab-9c3f-c8aeab1b79a5}" />
 	<object class="MixerBusFader" id="{2a3d14d7-d48c-462d-bef2-3ffd5fad5fc8}" />
+	<object class="FadeCurve" id="{530db1cf-6c23-4c66-84f3-804bce9b2bcb}">
+		<relationship name="startPoint">
+			<destination>{2d2a0a1f-22f7-4501-9efb-c04eae96d5f5}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{cd222acc-b8f9-4956-b847-fb21f1e52bd7}</destination>
+		</relationship>
+	</object>
+	<object class="FadeCurve" id="{c201f650-dd4f-4b39-9b3e-9798b4ca75ee}">
+		<relationship name="startPoint">
+			<destination>{420f827b-eb5e-4ab6-9470-97a9899adcd6}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{9e411a2f-339d-4b4e-b1c2-b0125bc97686}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{7e297a73-1778-43be-96a8-f2351ba20260}">
 		<relationship name="effects">
 			<destination>{766c6601-3152-46cb-83fc-4346c5d39768}</destination>
@@ -224,5 +246,43 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{462eebda-1757-430a-9b55-763dbd96dc32}" />
+	<object class="AutomationPoint" id="{2d2a0a1f-22f7-4501-9efb-c04eae96d5f5}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>-1.00000048</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{cd222acc-b8f9-4956-b847-fb21f1e52bd7}">
+		<property name="position">
+			<value>0.013254715376716722</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{420f827b-eb5e-4ab6-9470-97a9899adcd6}">
+		<property name="position">
+			<value>102</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>-1.00000048</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{9e411a2f-339d-4b4e-b1c2-b0125bc97686}">
+		<property name="position">
+			<value>102.03125</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{766c6601-3152-46cb-83fc-4346c5d39768}" />
 </objects>
