@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{05e7cc5e-c28f-4a07-a8f3-17fe02b21205}">
+		<property name="name">
+			<value>Switching</value>
+		</property>
+		<relationship name="folder">
+			<destination>{585dcaf6-ffc4-448a-b71e-b19fc62055c8}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{eea3c4d0-7a14-4fc2-affb-983295017490}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{eea3c4d0-7a14-4fc2-affb-983295017490}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Value A</value>
+			<value>Value B</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

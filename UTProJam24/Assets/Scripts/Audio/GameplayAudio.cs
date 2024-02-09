@@ -18,12 +18,16 @@ public class GameplayAudio : MonoBehaviour
         CameraSwitcher.OnCameraSwitched += SwitchSound; // if it should play earlier, use OnStartCameraSwitch instead
         ShelfHandler.OnCloseShelf += CloseToolboxSound;
         ShelfHandler.OnOpenShelf += OpenToolboxSound;
+
+        PlayerHandler.OnTimelineSwitch += HandleTimeline;
     }
     private void OnDisable()
     {
         CameraSwitcher.OnCameraSwitched -= SwitchSound;
         ShelfHandler.OnCloseShelf -= CloseToolboxSound;
         ShelfHandler.OnOpenShelf -= OpenToolboxSound;
+
+        PlayerHandler.OnTimelineSwitch -= HandleTimeline;
     }
     void SwitchSound()
     {
@@ -38,5 +42,16 @@ public class GameplayAudio : MonoBehaviour
     void OpenToolboxSound(List<ItemData> _)
     {
         boxSound.start();
+    }
+
+    void HandleTimeline(CurrentPlayer player) {
+    switch (player) {
+    case CurrentPlayer.Past:
+        AudioManager.Instance.SetMusicParameter("Switching", 1); //Value A in FMOD
+        break;
+    case CurrentPlayer.Present:
+        AudioManager.Instance.SetMusicParameter("Switching", 0); //Value B in FMOD
+        break;
+    }
     }
 }
