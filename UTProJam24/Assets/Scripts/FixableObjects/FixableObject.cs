@@ -74,13 +74,34 @@ public class FixableObject : MonoBehaviour
         InputHandler.interact += FixObject;
         Item.ItemUseConfirm += HandleItemSelect;
         GameManager.StartGame += HandleStart;
+        PauseMenuController.GamePaused += PauseAudio;
     }
+
 
     private void OnDisable()
     {
         InputHandler.interact -= FixObject;
         GameManager.StartGame -= HandleStart;
         Item.ItemUseConfirm -= HandleItemSelect;
+        PauseMenuController.GamePaused -= PauseAudio;
+    }
+
+
+
+    private void PauseAudio(bool paused)
+    {
+
+        if (paused)
+        {
+            if (currentlyActive)
+            {
+                if (burningSound.isValid()) burningSound.stop(STOP_MODE.IMMEDIATE);
+            }
+        }
+        else
+        {
+            if (currentlyActive && burningSound.isValid()) burningSound.start();
+        }
     }
 
     public void FixObject(CurrentPlayer player)
