@@ -4086,7 +4086,7 @@ MonoBehaviour:
   pauseButtons: {fileID: 1712426610}
   settingsBackButton: {fileID: 565929831}
   firstSelectedUIElement: {fileID: 1145533188}
-  touchUI: {fileID: 0}
+  touchUI: {fileID: 59008440}
 --- !u!1 &816069699
 GameObject:
   m_ObjectHideFlags: 0
