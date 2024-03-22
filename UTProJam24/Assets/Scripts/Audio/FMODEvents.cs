@@ -16,6 +16,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference FireSound { get; private set; }
     [field: SerializeField] public EventReference LeakSound { get; private set; }
     [field: SerializeField] public EventReference OxygenPump { get; private set; }
+    [field: SerializeField] public EventReference TapeSound { get; private set; }
     
     [field: Header("UI")]
     [field: SerializeField] public EventReference ButtonClick { get; private set; }
@@ -26,6 +27,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference MenuTheme { get; private set; }
     [field: SerializeField] public EventReference MainTheme { get; private set; }
     [field: SerializeField] public EventReference CreditsTheme { get; private set; }
+    [field: SerializeField] public EventReference GoodEndingTheme { get; private set; }
     public static FMODEvents Instance { get; private set; }
 
     private void Awake()
