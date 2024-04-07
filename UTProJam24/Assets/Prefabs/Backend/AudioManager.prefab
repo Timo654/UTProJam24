@@ -128,6 +128,34 @@ MonoBehaviour:
       Data3: -1859805547
       Data4: 1641425222
     Path: event:/SFX/OxygenPump
+  <TapeSound>k__BackingField:
+    Guid:
+      Data1: -762395515
+      Data2: 1225224884
+      Data3: -1797094228
+      Data4: -1748076005
+    Path: event:/SFX/TapeSound
+  <JumpingSound>k__BackingField:
+    Guid:
+      Data1: -1879044990
+      Data2: 1148462863
+      Data3: -1292845122
+      Data4: -148676104
+    Path: event:/SFX/JumpSound
+  <AlarmClockSound>k__BackingField:
+    Guid:
+      Data1: 771427674
+      Data2: 1265821266
+      Data3: 517840571
+      Data4: 631225621
+    Path: event:/SFX/AlarmClockSound
+  <SnortingSound>k__BackingField:
+    Guid:
+      Data1: -2134439257
+      Data2: 1180203801
+      Data3: -1761722978
+      Data4: 1120805073
+    Path: event:/SFX/SnortingSound
   <ButtonClick>k__BackingField:
     Guid:
       Data1: -1131144020
@@ -149,6 +177,13 @@ MonoBehaviour:
       Data3: -1658918491
       Data4: -1888852341
     Path: event:/UI/MenuBack
+  <DialogClick>k__BackingField:
+    Guid:
+      Data1: 1373554377
+      Data2: 1234061971
+      Data3: 272586167
+      Data4: 124090634
+    Path: event:/UI/DialogClick
   <MenuTheme>k__BackingField:
     Guid:
       Data1: 1454297395
@@ -170,6 +205,20 @@ MonoBehaviour:
       Data3: 389160103
       Data4: 2011289975
     Path: event:/Music/CreditMusic
+  <GoodEndingTheme>k__BackingField:
+    Guid:
+      Data1: -2046400084
+      Data2: 1309549557
+      Data3: 1728282289
+      Data4: 27268774
+    Path: event:/Music/GoodEndingMusic
+  <BadEndingTheme>k__BackingField:
+    Guid:
+      Data1: 2061746533
+      Data2: 1220206502
+      Data3: -470530404
+      Data4: 179004910
+    Path: event:/Music/BadEndingMusic
 --- !u!1 &7960876150336709347
 GameObject:
   m_ObjectHideFlags: 0
