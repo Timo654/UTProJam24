@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMOD.Studio;
+
 
 // code based on https://gmtk.itch.io/platformer-toolkit
 //This script handles moving the character on the Y axis, for jumping and gravity
@@ -42,6 +44,7 @@ public class Player_Jump : MonoBehaviour
     public bool onGround;
     private bool currentlyJumping;
     private bool isPaused = false;
+    public EventInstance playerJump;
     void Awake()
     {
         //Find the character's Rigidbody and ground detection
@@ -239,6 +242,8 @@ public class Player_Jump : MonoBehaviour
             desiredJump = false;
             jumpBufferCounter = 0;
             coyoteTimeCounter = 0;
+
+            playerJump = AudioManager.Instance.CreateInstance(FMODEvents.Instance.JumpingSound);
 
             //If we have double jump on, allow us to jump again (but only once)
             canJumpAgain = (maxAirJumps == 1 && canJumpAgain == false);

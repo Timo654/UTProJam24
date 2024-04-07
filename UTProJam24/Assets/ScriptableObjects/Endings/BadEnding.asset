@@ -16,10 +16,10 @@ MonoBehaviour:
   endingSprite: {fileID: 21300000, guid: 6c681662bc2f6f14198049a5a1c238a5, type: 3}
   endingMusic:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 2061746533
+      Data2: 1220206502
+      Data3: -470530404
+      Data4: 179004910
+    Path: event:/Music/BadEndingMusic
   endingText: factory went boom...
   endingSprite2: {fileID: 0}

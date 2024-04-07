@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{4a4057e6-25af-4deb-b428-4d472ffc363a}">
+		<property name="assetPath">
+			<value>SFX/alarm clock sound.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>16.979591836734695</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a027f7d5-b7bc-437b-b22d-4b5090dc23d7}</destination>
+		</relationship>
+	</object>
+</objects>

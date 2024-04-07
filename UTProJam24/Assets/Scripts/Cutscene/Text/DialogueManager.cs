@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMOD.Studio;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class DialogueManager : MonoBehaviour
     private ControlType controller;
     private bool gamePaused;
     private readonly int[] variables = new int[10];
+
+    public EventInstance dialogClicking;
     public void Awake()
     {
         playerControls = new PlayerControls();
@@ -224,6 +227,9 @@ public class DialogueManager : MonoBehaviour
             EndBottomText();
             return;
         }
+        
+    dialogClicking = AudioManager.Instance.CreateInstance(FMODEvents.Instance.DialogClick);
+
         currentBottomLine++;
         UpdateBottomText();
     }

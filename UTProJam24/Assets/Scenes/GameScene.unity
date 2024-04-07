@@ -4930,6 +4930,146 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <TapeSound>k__BackingField.Path
+      value: event:/SFX/TapeSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <DialogClick>k__BackingField.Path
+      value: event:/UI/DialogClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <JumpingSound>k__BackingField.Path
+      value: event:/SFX/JumpSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <SnortingSound>k__BackingField.Path
+      value: event:/SFX/SnortingSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <BadEndingTheme>k__BackingField.Path
+      value: event:/Music/BadEndingMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <AlarmClockSound>k__BackingField.Path
+      value: event:/SFX/AlarmClockSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <GoodEndingTheme>k__BackingField.Path
+      value: event:/Music/GoodEndingMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <TapeSound>k__BackingField.Guid.Data1
+      value: -762395515
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <TapeSound>k__BackingField.Guid.Data2
+      value: 1225224884
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <TapeSound>k__BackingField.Guid.Data3
+      value: -1797094228
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <TapeSound>k__BackingField.Guid.Data4
+      value: -1748076005
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <DialogClick>k__BackingField.Guid.Data1
+      value: 1373554377
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <DialogClick>k__BackingField.Guid.Data2
+      value: 1234061971
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <DialogClick>k__BackingField.Guid.Data3
+      value: 272586167
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <DialogClick>k__BackingField.Guid.Data4
+      value: 124090634
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <JumpingSound>k__BackingField.Guid.Data1
+      value: -1879044990
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <JumpingSound>k__BackingField.Guid.Data2
+      value: 1148462863
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <JumpingSound>k__BackingField.Guid.Data3
+      value: -1292845122
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <JumpingSound>k__BackingField.Guid.Data4
+      value: -148676104
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <SnortingSound>k__BackingField.Guid.Data1
+      value: -2134439257
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <SnortingSound>k__BackingField.Guid.Data2
+      value: 1180203801
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <SnortingSound>k__BackingField.Guid.Data3
+      value: -1761722978
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <SnortingSound>k__BackingField.Guid.Data4
+      value: 1120805073
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <BadEndingTheme>k__BackingField.Guid.Data1
+      value: 2061746533
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <BadEndingTheme>k__BackingField.Guid.Data2
+      value: 1220206502
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <BadEndingTheme>k__BackingField.Guid.Data3
+      value: -470530404
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <BadEndingTheme>k__BackingField.Guid.Data4
+      value: 179004910
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <AlarmClockSound>k__BackingField.Guid.Data1
+      value: 771427674
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <AlarmClockSound>k__BackingField.Guid.Data2
+      value: 1265821266
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <AlarmClockSound>k__BackingField.Guid.Data3
+      value: 517840571
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <AlarmClockSound>k__BackingField.Guid.Data4
+      value: 631225621
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <GoodEndingTheme>k__BackingField.Guid.Data1
+      value: -2046400084
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <GoodEndingTheme>k__BackingField.Guid.Data2
+      value: 1309549557
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <GoodEndingTheme>k__BackingField.Guid.Data3
+      value: 1728282289
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960876150304226863, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
+      propertyPath: <GoodEndingTheme>k__BackingField.Guid.Data4
+      value: 27268774
+      objectReference: {fileID: 0}
     - target: {fileID: 7960876150336709341, guid: 5e4e3f8dd3f08804f8012b35f15092b0, type: 3}
       propertyPath: m_RootOrder
       value: 1

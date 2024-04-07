@@ -16,10 +16,10 @@ MonoBehaviour:
   endingSprite: {fileID: 21300000, guid: 234f09cb9b2dffa498d66f8e32ff9f51, type: 3}
   endingMusic:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -2046400084
+      Data2: 1309549557
+      Data3: 1728282289
+      Data4: 27268774
+    Path: event:/Music/GoodEndingMusic
   endingText: congratulations!
   endingSprite2: {fileID: 21300000, guid: 46beb5a40d204ab4795d0d1723b65cad, type: 3}
