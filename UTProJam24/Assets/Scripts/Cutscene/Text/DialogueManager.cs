@@ -228,7 +228,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         
-    dialogClicking = AudioManager.Instance.CreateInstance(FMODEvents.Instance.DialogClick);
+        dialogClicking = AudioManager.Instance.CreateInstance(FMODEvents.Instance.DialogClick);
 
         currentBottomLine++;
         UpdateBottomText();
